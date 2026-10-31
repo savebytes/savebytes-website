@@ -41,7 +41,7 @@ export default function AboutPage() {
       </Section>
       <Section tone="subtle">
         <div className="sb-team">
-          <img src="/img/founder.jpg" alt="Ankit Singh, founder of SaveBytes" className="sb-team-photo" />
+          <img src="/img/founder.jpg" alt="Ankit Singh, founder of SaveBytes" width={640} height={634} loading="lazy" decoding="async" className="sb-team-photo" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
             <h2 className="sb-display">We're small on purpose.</h2>
             <p className="sb-lead" style={{ color: 'var(--color-text-secondary)' }}>Right now SaveBytes is one person. If you write to us, the founder reads it.</p>

@@ -2565,11 +2565,11 @@ function SearchInput({
     onClick: () => set(''),
     style: {
       position: 'absolute',
-      right: 6,
+      right: 2,
       top: '50%',
       transform: 'translateY(-50%)',
-      width: 28,
-      height: 28,
+      width: 36,
+      height: 36,
       border: 0,
       background: 'transparent',
       borderRadius: 4,
@@ -3194,6 +3194,7 @@ function SiteHeader({
   active,
   onNavigate,
   ctaLabel = 'Join early access',
+  homeHref = '#',
   onCta,
   scrolled = false,
   tone = 'brand',
@@ -3204,6 +3205,8 @@ function SiteHeader({
   const [hover, setHover] = React.useState(null);
   const nav = (id, e) => {
     if (onNavigate) {
+      // let the browser handle cmd/ctrl/shift/middle clicks (open in new tab) on real links
+      if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1)) return;
       e && e.preventDefault();
       onNavigate(id);
     }
@@ -3232,7 +3235,7 @@ function SiteHeader({
       gap: 32
     }
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#",
+    href: homeHref,
     onClick: e => nav('home', e),
     "aria-label": "SaveBytes home",
     style: {
@@ -3261,6 +3264,7 @@ function SiteHeader({
       fontSize: 15,
       lineHeight: '22px',
       fontWeight: 500,
+      padding: '11px 0',
       color: active === l.id || hover === l.id ? 'var(--color-text)' : 'var(--color-text-secondary)',
       textDecoration: 'none'
     }

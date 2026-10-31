@@ -27,7 +27,7 @@ export default function Footer() {
   const col = ({ title: t, links }) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
       <div className="sb-overline" style={{ color: 'var(--navy-400)' }}>{t}</div>
-      {links.map(({ id, label: l, href }) => <a key={id} href={href} onClick={e => { e.preventDefault(); go(id); }} style={{ color: 'var(--navy-200)', fontSize: 15 }}>{l}</a>)}
+      {links.map(({ id, label: l, href }) => <a key={id} href={href} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); go(id); }} style={{ color: 'var(--navy-200)', fontSize: 15 }}>{l}</a>)}
     </div>
   );
   return (

@@ -79,7 +79,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
                     <p className="sb-body" style={{ color: 'var(--color-text-secondary)', flex: 1 }}>{d}</p>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
                       <Badge tone="neutral" dot>In development</Badge>
-                      {link && <Link href="#" arrow onClick={e => { e.preventDefault(); go('health'); }}>Learn more</Link>}
+                      {link && <Link href="/health" arrow onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); go('health'); }}>Learn more</Link>}
                     </div>
                   </div>
                 </Card>
@@ -125,7 +125,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <FounderPhoto id="founder-home" size={48} />
             <div><div style={{ fontWeight: 600, fontSize: 15 }}>Ankit Singh</div><div style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>Founder &amp; CEO</div></div>
-            <span style={{ marginLeft: 'auto' }}><Link href="#" arrow onClick={e => { e.preventDefault(); go('about'); }}>Read the story</Link></span>
+            <span style={{ marginLeft: 'auto' }}><Link href="/about" arrow onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); go('about'); }}>Read the story</Link></span>
           </div>
         </div>
       </Section>

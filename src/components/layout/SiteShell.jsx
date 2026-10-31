@@ -28,7 +28,7 @@ export default function SiteShell({ children }) {
   return (
     <>
       <a href="#main" className="sb-skip">Skip to content</a>
-      <SiteHeader links={navLinks} active={page} onNavigate={go} onCta={() => go('contact')} scrolled={scrolled} mobile={mobile} tone={page === 'health' ? 'health' : 'brand'} />
+      <SiteHeader links={navLinks} active={page} homeHref="/" onNavigate={go} onCta={() => go('contact')} scrolled={scrolled} mobile={mobile} tone={page === 'health' ? 'health' : 'brand'} />
       <main id="main" style={{ marginTop: 'calc(-1 * var(--header-height))', paddingTop: 'var(--header-height)' }}>{children}</main>
       <Footer />
     </>

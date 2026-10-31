@@ -39,3 +39,13 @@ test('health consult panel fits its container with no sideways scroll', async ({
   );
   expect(bad).toEqual([]);
 });
+
+test('no placeholder "#" links; header logo and in-page links are real URLs', async ({ page }) => {
+  for (const path of pages) {
+    await page.goto(path, { waitUntil: 'networkidle' });
+    expect(await page.locator('a[href="#"]').count(), path).toBe(0);
+  }
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'SaveBytes home' })).toHaveAttribute('href', '/');
+  await expect(page.getByRole('link', { name: 'Learn more' })).toHaveAttribute('href', '/health');
+});
