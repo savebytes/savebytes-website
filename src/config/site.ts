@@ -11,6 +11,7 @@ export const site = {
   social: {
     linkedin: { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ankit-singh-72b744225/' },
     instagram: { label: 'Instagram', href: 'https://www.instagram.com/advaiticc' },
+    x: { label: 'X', href: 'https://x.com/singhankitt_' },
     portfolio: { label: 'Portfolio', href: 'https://ankit.savebytes.in/' },
   },
   location: 'Navi Mumbai, Maharashtra',
@@ -22,5 +23,6 @@ export const socialLinks = [
   { id: 'whatsapp', icon: 'message-circle', label: 'WhatsApp', text: site.whatsapp.label, href: site.whatsapp.href },
   { id: 'linkedin', icon: 'linkedin', label: 'LinkedIn', text: 'Ankit Singh', href: site.social.linkedin.href },
   { id: 'instagram', icon: 'instagram', label: 'Instagram', text: '@advaiticc', href: site.social.instagram.href },
+  { id: 'x', icon: 'x-twitter', label: 'X', text: '@singhankitt_', href: site.social.x.href },
   { id: 'portfolio', icon: 'globe', label: 'Portfolio', text: 'ankit.savebytes.in', href: site.social.portfolio.href },
 ] as const;

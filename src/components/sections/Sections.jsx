@@ -84,7 +84,7 @@ function ScreenPanel({ children, title = 'OPD queue · Today', style }) {
   return (
     <div style={{ background: '#fff', border: '1px solid var(--color-line)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden', ...style }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, height: 44, padding: '0 16px', borderBottom: '1px solid var(--color-line)', background: 'var(--color-surface-subtle)' }}>
-        <Logo size={16} tone="health" />
+        <span data-sb-mark style={{ display: 'flex' }}><Logo size={16} tone="health" /></span>
         <span style={{ fontSize: 13, fontWeight: 500 }}>{title}</span>
         <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--color-text-muted)' }}>12 Mar 2026</span>
       </div>

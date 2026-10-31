@@ -57,6 +57,7 @@ test('profile links are present, correct and open safely', async ({ page }) => {
   expect(flat).toContain('https://www.linkedin.com/in/ankit-singh-72b744225/');
   expect(flat).toContain('https://www.instagram.com/advaiticc');
   expect(flat).toContain('https://ankit.savebytes.in/');
+  expect(flat).toContain('https://x.com/singhankitt_');
   expect(flat.some((h) => h!.startsWith('https://wa.me/918789286009'))).toBe(true);
   for (const [, rel] of hrefs) expect(rel).toContain('noopener');
 });

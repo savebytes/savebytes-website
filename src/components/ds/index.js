@@ -1,6 +1,8 @@
 'use client';
 import React from 'react';
-import { ICONS } from './icons';
+import { ICONS as GENERATED_ICONS } from './icons';
+import { CUSTOM_ICONS } from './icons.custom';
+const ICONS = { ...GENERATED_ICONS, ...CUSTOM_ICONS };
 const __ds_ns = {};
 
 const __ds_scope = {};
@@ -1346,6 +1348,7 @@ function Row({
   const [h, setH] = React.useState(false);
   return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("button", {
     type: "button",
+    className: "sb-q-row",
     onClick: () => onSelect && onSelect(r),
     onMouseEnter: () => setH(true),
     onMouseLeave: () => setH(false),
@@ -1396,6 +1399,7 @@ function Row({
       whiteSpace: 'nowrap'
     }
   }, r.age, " \xB7 ", r.sex, r.reason ? ' · ' + r.reason : '')), /*#__PURE__*/React.createElement("span", {
+    className: "sb-q-time",
     style: {
       fontFamily: 'var(--font-mono)',
       fontSize: 13,
@@ -1417,6 +1421,7 @@ function OpdQueue({
 }) {
   const act = activeToken !== undefined ? activeToken : (rows.find(r => r.status === 'in-consult') || {}).token;
   return /*#__PURE__*/React.createElement("ul", {
+    className: "sb-q",
     style: {
       listStyle: 'none',
       margin: 0,

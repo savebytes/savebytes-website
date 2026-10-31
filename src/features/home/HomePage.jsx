@@ -26,15 +26,54 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
   const go = useGo();
   const { Logo, Button, Link, Card, Badge, Icon, Avatar } = DS;
   const [playing, setPlaying] = React.useState(false);
-  const [settled, setSettled] = React.useState(true);
+  const logoRef = React.useRef(null);
+  const panelRef = React.useRef(null);
+
+  // Decide once per session whether the intro plays. Reduced motion gets a plain fade, no movement.
   React.useEffect(() => {
-    let skip = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    try { skip = skip || sessionStorage.getItem('sb-intro-played') === '1'; } catch (e) {}
-    if (skip) return;
-    setPlaying(true); setSettled(false);
-    const t = setTimeout(() => { setSettled(true); try { sessionStorage.setItem('sb-intro-played', '1'); } catch (e) {} }, 1600);
-    return () => clearTimeout(t);
+    const panel = panelRef.current; if (!panel) return;
+    let seen = false; try { seen = sessionStorage.getItem('sb-intro-played') === '1'; } catch (e) {}
+    if (seen) return;
+    try { sessionStorage.setItem('sb-intro-played', '1'); } catch (e) {}
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      panel.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: 'ease-out' });
+      return;
+    }
+    panel.style.opacity = '0';
+    setPlaying(true);
   }, []);
+
+  // The focal moment: logo intro (1.6s) -> brief hold -> the logo glides into the panel's title bar
+  // while the panel unfolds downward from it, and the SaveBytes mark dissolves into the Health mark.
+  React.useEffect(() => {
+    if (!playing) return;
+    const panel = panelRef.current, logo = logoRef.current;
+    const mark = panel && panel.querySelector('[data-sb-mark]');
+    if (!panel || !logo || !mark) { if (panel) panel.style.opacity = ''; setPlaying(false); return; }
+    const anims = [];
+    const settle = () => { panel.style.opacity = ''; mark.style.opacity = ''; setPlaying(false); };
+    const t = setTimeout(() => {
+      const lr = logo.getBoundingClientRect(), mr = mark.getBoundingClientRect();
+      const dx = mr.left + mr.width / 2 - (lr.left + lr.width / 2), dy = mr.top + mr.height / 2 - (lr.top + lr.height / 2);
+      const glide = 'cubic-bezier(0.65, 0, 0.35, 1)', arrive = 'cubic-bezier(0.16, 1, 0.3, 1)';
+      mark.style.opacity = '0';
+      panel.style.opacity = '';
+      anims.push(panel.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 450, easing: 'ease-out', fill: 'backwards' }));
+      anims.push(panel.animate(
+        [{ clipPath: 'inset(0 0 calc(100% - 44px) 0 round 16px)' }, { clipPath: 'inset(0 0 0 0 round 16px)' }],
+        { duration: 950, delay: 800, easing: arrive, fill: 'backwards' }));
+      const flight = logo.animate(
+        [{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px) scale(${mr.width / lr.width})` }],
+        { duration: 1200, easing: glide, fill: 'forwards' });
+      anims.push(flight);
+      flight.finished.then(() => {
+        mark.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 240, easing: 'ease-out', fill: 'forwards' });
+        const out = logo.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 240, easing: 'ease-out', fill: 'forwards' });
+        out.finished.then(settle, settle);
+      }, settle);
+    }, 2100);
+    return () => { clearTimeout(t); anims.forEach(a => a.cancel()); panel.style.opacity = ''; mark.style.opacity = ''; };
+  }, [playing]);
   return (
     <>
       <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop />
@@ -48,8 +87,8 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
             </div>
           </div>
           <div className="sb-hero-visual">
-            {playing && <div aria-hidden="true" style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', opacity: settled ? 0 : 1, transition: 'opacity 320ms var(--ease-out)', pointerEvents: 'none' }}><Logo size={160} animate="intro" /></div>}
-            <div style={{ opacity: settled ? 1 : 0, transform: settled ? 'none' : 'translateY(24px)', transition: 'opacity 320ms var(--ease-out), transform 320ms var(--ease-out)' }}><QueuePanel /></div>
+            {playing && <div aria-hidden="true" style={{ position: 'absolute', left: 0, top: '50%', marginTop: -80, zIndex: 2, pointerEvents: 'none' }}><div ref={logoRef} style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}><Logo size={160} animate="intro" /></div></div>}
+            <div ref={panelRef}><QueuePanel /></div>
           </div>
         </div>
       </section>
