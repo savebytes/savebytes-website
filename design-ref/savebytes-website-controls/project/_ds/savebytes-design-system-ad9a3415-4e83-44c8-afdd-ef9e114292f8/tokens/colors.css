@@ -1,0 +1,30 @@
+:root{
+/* Blue — brand and action (step 600 = SaveBytes Blue) */
+--blue-50:#EEF2FF;--blue-100:#DCE4FF;--blue-200:#B9C8FF;--blue-300:#93AAFF;--blue-400:#6E8CFF;
+--blue-500:#4E72FF;--blue-600:#2F5BFF;--blue-700:#2448E0;--blue-800:#1B37B8;--blue-900:#142A8C;
+/* Navy — text and cool neutrals (step 900 = SaveBytes Navy) */
+--navy-50:#F5F7FA;--navy-100:#EEF1F5;--navy-200:#E3E7EE;--navy-300:#C5CCD8;--navy-400:#8A94A6;
+--navy-500:#6B7588;--navy-600:#5A6478;--navy-700:#3D4A5C;--navy-800:#1F2D44;--navy-900:#0B1B33;
+/* Teal — SaveBytes Health accent only */
+--teal-50:#E6F6F4;--teal-600:#0E9F8E;--teal-700:#0B7D70;
+
+/* Semantic */
+--color-surface:#FFFFFF;--color-surface-subtle:var(--navy-50);--color-surface-sunken:var(--navy-100);
+--color-surface-inverse:var(--navy-900);
+--color-line:var(--navy-200);--color-line-strong:var(--navy-300);--color-border-control:var(--navy-400);
+--color-text:var(--navy-900);--color-text-secondary:var(--navy-700);--color-text-muted:var(--navy-600);
+--color-text-inverse:#FFFFFF;
+--color-brand:var(--blue-600);--color-brand-hover:var(--blue-700);--color-brand-pressed:var(--blue-800);
+--color-brand-soft:var(--blue-50);--color-on-brand:#FFFFFF;--color-link:var(--blue-700);
+--color-link-inverse:var(--blue-400);
+--color-focus-ring:var(--blue-600);
+--color-health:var(--teal-600);--color-health-text:var(--teal-700);--color-health-soft:var(--teal-50);
+
+/* Status — fixed, never white-labelled */
+--color-success:#0F7552;--color-success-soft:#E7F6EF;
+--color-warning:#B45309;--color-warning-soft:#FEF3E2;
+--color-danger:#C8102E;--color-danger-soft:#FDECEE;
+--color-info:var(--blue-700);--color-info-soft:var(--blue-50);
+
+--color-overlay:rgba(11,27,51,.48);
+}

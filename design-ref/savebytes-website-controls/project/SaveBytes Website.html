@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SaveBytes · Software that wastes nothing</title>
+<meta name="description" content="SaveBytes builds fast, focused software from Navi Mumbai, starting with an EHR for Indian clinics.">
+<link rel="icon" href="site/favicon.svg">
+<link rel="stylesheet" href="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/tokens/colors.css">
+<link rel="stylesheet" href="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/tokens/typography.css">
+<link rel="stylesheet" href="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/tokens/effects.css">
+<link rel="stylesheet" href="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/tokens/base.css">
+<link rel="stylesheet" href="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="_ds/savebytes-design-system-ad9a3415-4e83-44c8-afdd-ef9e114292f8/_ds_bundle.js"></script>
+<script src="site/image-slot.js"></script>
+<style>
+a{color:var(--color-link)}a:hover{color:var(--blue-800)}
+.sb-container{max-width:var(--content-max);margin:0 auto;padding:0 48px;box-sizing:content-box}
+body{--sb-pad:96px;--sb-scale:1}
+body.sb-airy{--sb-pad:144px;--sb-scale:1.15}
+body.sb-compact{--sb-pad:64px;--sb-scale:.86}
+.sb-section{padding:var(--sb-pad) 0}
+.sb-hero{padding:var(--sb-pad) 0}
+body.sb-ruled .sb-section[data-tone=subtle]{background:#fff!important}
+body.sb-ruled .sb-section[data-tone=white]+.sb-section,body.sb-ruled .sb-section[data-tone=subtle]{border-top:1px solid var(--color-line)}
+body.sb-ruled .sb-section[data-tone=white] .sb-container,body.sb-ruled .sb-section[data-tone=subtle] .sb-container{position:relative}
+body.sb-grid .sb-section[data-tone=subtle]{background:var(--dot-grid),var(--color-surface-subtle)!important}
+.sb-overline{font-family:var(--font-mono);font-size:12px;line-height:16px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.sb-display-xl{font-size:calc(64px * var(--sb-scale));line-height:1.06;font-weight:600;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.sb-display{font-size:calc(44px * var(--sb-scale));line-height:1.18;font-weight:600;letter-spacing:-.015em;text-wrap:balance;margin:0}
+.sb-h1{font-size:32px;line-height:40px;font-weight:600;letter-spacing:-.01em;margin:0}
+.sb-h2{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.005em;text-wrap:pretty;margin:0}
+.sb-h3{font-size:18px;line-height:26px;font-weight:600;margin:0}
+.sb-lead,.sb-body-lg{font-size:18px;line-height:28px;text-wrap:pretty;margin:0}
+.sb-body{font-size:16px;line-height:26px;text-wrap:pretty;margin:0}
+.sb-placeholder{background:var(--color-warning-soft);color:var(--color-warning);font-family:var(--font-mono);font-size:.875em;padding:1px 4px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sb-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.sb-hero-visual{position:relative;min-height:340px;display:flex;flex-direction:column;justify-content:center}
+.sb-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px}
+.sb-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.sb-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.sb-mark{display:flex;align-items:center;gap:12px;font-size:14px;line-height:20px;font-weight:500;color:var(--color-text-secondary)}
+.sb-mark-num{font-family:var(--font-mono);font-size:14px;font-weight:500;color:var(--color-text);font-variant-numeric:tabular-nums;min-width:1ch}
+.sb-mark-rule{width:28px;height:1.5px;background:var(--navy-300);flex:none}
+.sb-mark-inverse{color:var(--navy-200)}.sb-mark-inverse .sb-mark-num{color:#fff}.sb-mark-inverse .sb-mark-rule{background:var(--navy-600)}
+.sb-team{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:64px;align-items:center}
+.sb-team-photo{width:100%;aspect-ratio:1;object-fit:cover;object-position:40% 30%;border-radius:var(--radius-lg);border:1px solid var(--color-line);display:block;max-width:420px}
+@media (max-width:1023px){.sb-team{grid-template-columns:1fr;gap:32px}.sb-team-photo{max-width:320px}}
+.sb-ws{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;position:relative}
+.sb-ws-step{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:0 0 24px;position:relative}
+.sb-ws>div:not(:last-child) .sb-ws-step::before{content:"";position:absolute;left:19.5px;top:44px;bottom:4px;width:1px;background:var(--navy-700)}
+.sb-ws-icon{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;border:1px solid var(--blue-400);color:var(--blue-400);background:var(--navy-900)}
+.sb-ws-step.is-planned .sb-ws-icon{border:1px dashed var(--navy-600);color:var(--navy-300)}
+.sb-ws-status{font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-400)}
+.sb-ws-step.is-planned .sb-ws-status{color:var(--navy-400)}
+.sb-ws-note{margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;color:var(--color-text);border-radius:var(--radius-md);padding:8px 12px;font-size:13px;line-height:18px;box-shadow:var(--shadow-md);align-self:flex-start}
+.sb-ws-urgent{font-size:12px;font-weight:500;color:var(--color-danger);background:var(--color-danger-soft);border-radius:var(--radius-xs);padding:1px 6px}
+.sb-principle-num{font-family:var(--font-mono);font-size:14px;line-height:28px;font-weight:500;color:var(--navy-500);font-variant-numeric:tabular-nums}
+.sb-principle{display:grid;grid-template-columns:32px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--color-line)}
+.sb-privacy-row{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;padding:24px 0;border-top:1px solid var(--color-line)}
+.sb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+.sb-diagram{display:flex;flex-direction:column;max-width:420px;width:100%;align-self:center;justify-self:end}
+.sb-thread{position:absolute;left:max(8px,calc((100% - 1200px)/2 - 40px));top:0;width:32px;height:100%;pointer-events:none;z-index:1}
+.sb-flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.sb-flow-step{width:100%;height:100%;display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px;border:1px solid;border-radius:var(--radius-md);cursor:pointer;font-family:var(--font-sans);text-align:left;transition:background var(--duration-fast) var(--ease-out),border-color var(--duration-fast) var(--ease-out)}
+.sb-has-backdrop{position:relative;overflow:hidden}.sb-has-backdrop>.sb-container,.sb-section[data-tone=inverse]>.sb-container{position:relative;z-index:1}
+.sb-section[data-tone=inverse]{position:relative;overflow:hidden}
+.sb-backdrop{position:absolute;inset:0;pointer-events:none}
+.sb-bd-wash{position:absolute;inset:0;background:linear-gradient(180deg,var(--blue-50) 0%,rgba(238,242,255,.55) 40%,rgba(255,255,255,0) 100%)}
+.sb-backdrop-health .sb-bd-wash{background:linear-gradient(180deg,var(--teal-50) 0%,rgba(230,246,244,.55) 40%,rgba(255,255,255,0) 100%)}
+.sb-bd-dots{position:absolute;inset:0;background:var(--dot-grid);-webkit-mask-image:linear-gradient(100deg,transparent 10%,#000 60%);mask-image:linear-gradient(100deg,transparent 10%,#000 60%)}
+.sb-bd-cut{position:absolute;top:0;right:0;width:52%;height:100%;opacity:.9}
+.sb-bd-cut path{stroke-dasharray:1;stroke-dashoffset:1;animation:sb-draw 1.6s var(--ease-out) .2s forwards}
+@keyframes sb-draw{to{stroke-dashoffset:0}}
+.sb-spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 320ms var(--ease-out);background:radial-gradient(circle,var(--blue-400) 1.2px,transparent 1.6px) 0 0/24px 24px;-webkit-mask-image:radial-gradient(circle 220px at var(--mx,50%) var(--my,50%),#000 0%,rgba(0,0,0,.35) 45%,transparent 100%);mask-image:radial-gradient(circle 220px at var(--mx,50%) var(--my,50%),#000 0%,rgba(0,0,0,.35) 45%,transparent 100%)}
+.sb-spot-inverse{background:radial-gradient(circle,var(--blue-400) 1.2px,transparent 1.6px) 0 0/24px 24px}
+.sb-backdrop-health .sb-spot{background:radial-gradient(circle,var(--teal-600) 1.2px,transparent 1.6px) 0 0/24px 24px}
+body.sb-bg-flat .sb-backdrop,body.sb-bg-flat .sb-spot{display:none}
+body.sb-bg-wash .sb-spot{display:none}
+image-slot.sb-photo::part(empty){font-size:0;line-height:0;gap:0}
+@keyframes sb-flow-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (max-width:1023px){.sb-container{padding:0 32px}.sb-hero-grid,.sb-split{grid-template-columns:1fr;gap:40px}.sb-grid-3{grid-template-columns:1fr 1fr}.sb-flow{grid-template-columns:repeat(3,minmax(0,1fr))}.sb-thread{display:none}.sb-bd-cut{display:none}.sb-diagram{justify-self:start}}
+@media (max-width:639px){body{--sb-pad:64px}body.sb-airy{--sb-pad:88px}body.sb-compact{--sb-pad:48px}.sb-container{padding:0 20px}.sb-display-xl{font-size:calc(40px * var(--sb-scale))}.sb-display{font-size:calc(32px * var(--sb-scale))}.sb-grid-2,.sb-grid-3{grid-template-columns:1fr}.sb-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.sb-footer-grid{grid-template-columns:1fr 1fr}.sb-privacy-row{grid-template-columns:1fr;gap:8px}.sb-hero-visual{min-height:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;transition-duration:1ms!important}}
+</style></head><body><div id="root"></div>
+<script type="text/babel" src="site/tweaks-panel.jsx"></script>
+<script type="text/babel" src="site/Sections.jsx"></script>
+<script type="text/babel" src="site/Home.jsx"></script>
+<script type="text/babel" src="site/Health.jsx"></script>
+<script type="text/babel" src="site/About.jsx"></script>
+<script type="text/babel" src="site/Contact.jsx"></script>
+<script type="text/babel" src="site/Privacy.jsx"></script>
+<script type="text/babel">
+const { SiteHeader } = window.SaveBytesDesignSystem_ad9a34;
+const LINKS = [{ id: 'health', label: 'Health', href: '#/health' }, { id: 'platform', label: 'Platform', href: '#/platform' }, { id: 'about', label: 'About', href: '#/about' }, { id: 'contact', label: 'Contact', href: '#/contact' }];
+const META = {
+  home: ['SaveBytes · Software that wastes nothing', 'SaveBytes builds fast, focused software from Navi Mumbai, starting with an EHR for Indian clinics.'],
+  health: ['SaveBytes Health · EHR for Indian clinics', 'Appointments, queue, vitals, consult and prescriptions on one fast screen. Built for clinics with 2–5 doctors. In development.'],
+  about: ['About SaveBytes', 'How a GitHub repository name became a software company, and how we build.'],
+  contact: ['Contact SaveBytes', 'Run a clinic in Navi Mumbai or Mumbai? Join early access to SaveBytes Health.'],
+  privacy: ['Privacy · SaveBytes', 'How savebytes.in handles the details you send us.'],
+};
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "headline": "Software that wastes nothing.",
+  "rhythm": "Compact",
+  "surfaces": "Bands",
+  "backdrop": "Interactive"
+}/*EDITMODE-END*/;
+const HEADLINES = ['Software that wastes nothing.', 'Less clicking. More seeing patients.', 'Every byte, every click, every minute: accounted for.'];
+const fromHash = () => { const h = location.hash.replace(/^#\/?/, ''); return h === 'platform' ? 'platform' : META[h] ? h : (localStorage.getItem('sb-site-page') || 'home'); };
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  React.useEffect(() => { const b = document.body.classList; b.toggle('sb-airy', t.rhythm === 'Airy'); b.toggle('sb-compact', t.rhythm === 'Compact'); b.toggle('sb-ruled', t.surfaces === 'Ruled'); b.toggle('sb-grid', t.surfaces === 'Dot grid'); b.toggle('sb-bg-flat', t.backdrop === 'Flat'); b.toggle('sb-bg-wash', t.backdrop === 'Wash'); }, [t.rhythm, t.surfaces, t.backdrop]);
+  const [page, setPage] = React.useState(() => { const p = fromHash(); return p === 'platform' ? 'home' : p; });
+  const [scrolled, setScrolled] = React.useState(false);
+  const [mobile, setMobile] = React.useState(window.innerWidth < 760);
+  React.useEffect(() => { const s = () => setScrolled(window.scrollY > 8); const r = () => setMobile(window.innerWidth < 760); s(); window.addEventListener('scroll', s, { passive: true }); window.addEventListener('resize', r); return () => { window.removeEventListener('scroll', s); window.removeEventListener('resize', r); }; }, []);
+  React.useEffect(() => { const [t, d] = META[page]; document.title = t; document.querySelector('meta[name=description]').setAttribute('content', d); }, [page]);
+  const go = id => {
+    if (id === 'platform') { setPage('home'); localStorage.setItem('sb-site-page', 'home'); history.replaceState(null, '', '#/platform'); setTimeout(() => { const el = document.getElementById('platform'); el && window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' }); }, 60); return; }
+    setPage(id); localStorage.setItem('sb-site-page', id); history.replaceState(null, '', '#/' + (id === 'home' ? '' : id)); window.scrollTo(0, 0);
+  };
+  React.useEffect(() => { if (location.hash === '#/platform') go('platform'); }, []);
+  const P = { home: HomePage, health: HealthPage, about: AboutPage, contact: ContactPage, privacy: PrivacyPage }[page] || HomePage;
+  return (
+    <>
+      <SiteHeader links={LINKS} active={page} onNavigate={go} onCta={() => go('contact')} scrolled={scrolled} mobile={mobile} tone={page === 'health' ? 'health' : 'brand'} />
+      <main data-screen-label={page} style={{ marginTop: 'calc(-1 * var(--header-height))', paddingTop: 'var(--header-height)' }}><P key={page} go={go} headline={t.headline} /></main>
+      <Footer go={go} />
+      <TweaksPanel>
+        <TweakSection label="Message" />
+        <TweakSelect label="Home headline" value={t.headline} options={HEADLINES} onChange={v => { setTweak('headline', v); if (page !== 'home') go('home'); }} />
+        <TweakSection label="Feel" />
+        <TweakRadio label="Rhythm" value={t.rhythm} options={['Compact', 'Standard', 'Airy']} onChange={v => setTweak('rhythm', v)} />
+        <TweakRadio label="Surfaces" value={t.surfaces} options={['Bands', 'Ruled', 'Dot grid']} onChange={v => setTweak('surfaces', v)} />
+        <TweakRadio label="Backdrop" value={t.backdrop} options={['Flat', 'Wash', 'Interactive']} onChange={v => setTweak('backdrop', v)} />
+      </TweaksPanel>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script></body></html>
