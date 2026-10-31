@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { ICONS } from './icons';
 const __ds_ns = {};
 
 const __ds_scope = {};
@@ -8,18 +9,7 @@ const __ds_scope = {};
 
 // components/core/Icon.jsx
 try { (() => {
-const CDN = 'https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/';
-const cache = {};
-const pending = {};
-function load(name) {
-  if (cache[name] !== undefined) return Promise.resolve(cache[name]);
-  if (!pending[name]) {
-    pending[name] = fetch(CDN + name + '.svg').then(r => r.ok ? r.text() : '').catch(() => '').then(t => cache[name] = t.replace(/<!--[\s\S]*?-->/g, '').trim());
-  }
-  return pending[name];
-}
-
-/** Lucide icon (CDN), stroke 1.75, inherits currentColor. */
+/** Lucide icon (inlined at build time from ./icons.js), stroke 1.75, inherits currentColor. */
 function Icon({
   name,
   size = 20,
@@ -28,14 +18,7 @@ function Icon({
   label,
   style
 }) {
-  const [raw, setRaw] = React.useState(cache[name] || '');
-  React.useEffect(() => {
-    let on = true;
-    load(name).then(t => on && setRaw(t));
-    return () => {
-      on = false;
-    };
-  }, [name]);
+  const raw = ICONS[name] || '';
   const svg = raw.replace(/width="24"/, 'width="100%"').replace(/height="24"/, 'height="100%"').replace(/stroke-width="[^"]*"/, 'stroke-width="' + strokeWidth + '"');
   return /*#__PURE__*/React.createElement("span", {
     role: label ? 'img' : undefined,
@@ -142,6 +125,7 @@ function VitalsStrip({
   style
 }) {
   return /*#__PURE__*/React.createElement("div", {
+    className: "sb-vitals",
     style: {
       display: 'grid',
       gridTemplateColumns: 'repeat(' + vitals.length + ', minmax(0, 1fr))',
@@ -153,6 +137,7 @@ function VitalsStrip({
     }
   }, vitals.map((v, i) => /*#__PURE__*/React.createElement("div", {
     key: v.label,
+    className: "sb-vital",
     style: {
       padding: dense ? '8px 12px' : '12px 16px',
       borderLeft: i ? '1px solid var(--color-line)' : 0,
@@ -1508,7 +1493,7 @@ function PatientBanner({
       alignItems: 'baseline',
       gap: 10
     }
-  }, /*#__PURE__*/React.createElement("h1", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       margin: 0,
       fontSize: 20,

@@ -40,7 +40,6 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
       <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop />
         <div className="sb-container sb-hero-grid">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <Overline>SaveBytes · Navi Mumbai</Overline>
             <h1 className="sb-display-xl">{headline}</h1>
             <p className="sb-lead" style={{ color: 'var(--color-text-secondary)', maxWidth: 560 }}>We build fast, focused software for the places where time matters most. We're starting with clinics: an EHR that keeps up with a busy OPD instead of slowing it down.</p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 8 }}>
@@ -59,7 +58,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
         <CutThread />
         <Section tone="subtle">
           <div className="sb-split">
-            <SectionHeader overline="01 / Why we exist" title="Most clinic software is built to be sold, not to be used." />
+            <SectionHeader title="Most clinic software is built to be sold, not to be used." />
             <Reveal style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 'var(--reading-max)' }}>
               <p className="sb-body-lg">It comes with forty modules, a week of training and a screen full of buttons. So the doctor goes back to the paper pad, the receptionist keeps a register on the side, and the software becomes one more bill every month.</p>
               <p className="sb-body-lg" style={{ color: 'var(--color-text-secondary)' }}>We think good software should feel like a good assistant: there when you need it, invisible when you don't. That means doing fewer things, and doing them properly.</p>
@@ -68,7 +67,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
         </Section>
 
         <Section id="platform">
-          <SectionHeader overline="02 / What we build" title="A platform first. Products on top." intro="SaveBytes is a technology company. We build one strong, configurable core and shape it into products for specific jobs. Healthcare is where we're starting." />
+          <SectionHeader title="A platform first. Products on top." intro="SaveBytes is a technology company. We build one strong, configurable core and shape it into products for specific jobs. Healthcare is where we're starting." />
           <div className="sb-grid-2" style={{ marginTop: 48 }}>
             {[['health', 'SaveBytes Health', 'Clinic and EHR software for Indian clinics and small hospitals. Appointments, queue, vitals, notes, prescriptions, on one fast screen.', true],
               ['platform', 'SaveBytes Platform', 'The configurable core underneath: tenants, roles, forms, branding and audit, built on open healthcare standards. It lets each clinic, or a partner, run the same product shaped to them, without a custom fork of the code.', false]].map(([tone, t, d, link], i) => (
@@ -91,7 +90,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
 
         <Section tone="subtle">
           <div className="sb-split">
-            <SectionHeader overline="03 / How we work" title="Five rules we build by." />
+            <SectionHeader title="Five rules we build by." />
             <Principles />
           </div>
         </Section>
@@ -100,7 +99,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
       <Section tone="inverse" grid>
         <div className="sb-split">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <SectionHeader inverse overline="04 / Under the hood" title="Boring where it should be. Careful everywhere." />
+            <SectionHeader inverse title="Boring where it should be. Careful everywhere." />
             <p className="sb-body-lg" style={{ color: 'var(--navy-200)', maxWidth: 'var(--reading-max)' }}>SaveBytes Health is built on Medplum, an open-source healthcare platform, and stores clinical records as FHIR resources. That gives us a proven foundation for the hard, unglamorous parts (data model, access control, audit) so our time goes into the part you actually touch.</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {['FHIR R4', 'Medplum', 'TypeScript', 'Per-clinic isolation', 'Audit trail', 'Export anytime'].map(t => <span key={t} style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--navy-200)', border: '1px solid var(--navy-800)', borderRadius: 4, padding: '4px 8px', whiteSpace: 'nowrap' }}>{t}</span>)}
@@ -122,8 +121,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
 
       <Section>
         <div style={{ maxWidth: 'var(--reading-max)', display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <SectionMark label="05 / The name" />
-          <blockquote className="sb-h2" style={{ margin: 0, fontWeight: 500 }}>"I named my first GitHub repo SaveBytes because good software should use less: less memory, less time, less of your patience. It turned into a company."</blockquote>
+          <blockquote className="sb-quote">“I named my first GitHub repo SaveBytes because good software should use less: less memory, less time, less of your patience. It turned into a company.”</blockquote>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <FounderPhoto id="founder-home" size={48} />
             <div><div style={{ fontWeight: 600, fontSize: 15 }}>Ankit Singh</div><div style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>Founder &amp; CEO</div></div>

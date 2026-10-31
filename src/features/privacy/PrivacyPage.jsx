@@ -18,7 +18,6 @@ export default function PrivacyPage() {
     <>
       <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop />
         <div className="sb-container" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <Overline>Privacy</Overline>
           <h1 className="sb-display-xl" style={{ maxWidth: 900 }}>What this website does with your details.</h1>
           <p className="sb-lead" style={{ color: 'var(--color-text-secondary)', maxWidth: 'var(--reading-max)' }}>Short version: very little. Here is all of it, in plain words.</p>
           <div><span className="sb-placeholder">[Have this reviewed before launch.]</span></div>

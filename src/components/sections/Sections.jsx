@@ -24,10 +24,9 @@ function SectionMark({ children, label: text, inverse }) {
   );
 }
 
-function SectionHeader({ overline, title, intro, inverse, center }) {
+function SectionHeader({ title, intro, inverse, center }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 760, textAlign: center ? 'center' : 'left', alignItems: center ? 'center' : 'flex-start', margin: center ? '0 auto' : undefined }}>
-      {overline && <SectionMark inverse={inverse} label={overline} />}
       <h2 className="sb-display" style={{ color: inverse ? '#fff' : 'var(--color-text)' }}>{title}</h2>
       {intro && <p className="sb-lead" style={{ color: inverse ? 'var(--navy-200)' : 'var(--color-text-secondary)' }}>{intro}</p>}
     </div>
@@ -156,7 +155,7 @@ function CtaBand({ title = 'Running a clinic in Navi Mumbai or Mumbai?', body, o
 }
 
 function FounderPhoto({ id, size = 56 }) {
-  return <img src="/img/founder.png" alt="Ankit Singh, founder of SaveBytes" width={size} height={size} style={{ width: size, height: size, flex: 'none', display: 'block', borderRadius: '50%', objectFit: 'cover', objectPosition: '40% 30%' }} />;
+  return <img src="/img/founder.jpg" alt="Ankit Singh, founder of SaveBytes" width={size} height={size} style={{ width: size, height: size, flex: 'none', display: 'block', borderRadius: '50%', objectFit: 'cover', objectPosition: '40% 30%' }} />;
 }
 
 export {SectionMark, Spotlight, HeroBackdrop, FounderPhoto, Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand };

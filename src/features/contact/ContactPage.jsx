@@ -28,7 +28,6 @@ export default function ContactPage() {
     <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop />
       <div className="sb-container sb-split" style={{ alignItems: 'start' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <Overline>Contact · Early access</Overline>
           <h1 className="sb-display-xl">Talk to us.</h1>
           <p className="sb-lead" style={{ color: 'var(--color-text-secondary)' }}>Whether you run a clinic, want to partner, or just want to see what we're building, write to us. We reply within one working day.</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8, fontSize: 16 }}>

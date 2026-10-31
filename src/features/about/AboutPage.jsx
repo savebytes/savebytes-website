@@ -10,7 +10,6 @@ export default function AboutPage() {
     <>
       <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop />
         <div className="sb-container" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <Overline>About</Overline>
           <h1 className="sb-display-xl" style={{ maxWidth: 900 }}>It started as a repository name.</h1>
         </div>
       </section>
@@ -25,13 +24,13 @@ export default function AboutPage() {
       </Section>
       <Section tone="subtle">
         <div className="sb-split">
-          <SectionHeader overline="Principles" title="Five rules we build by." />
+          <SectionHeader title="Five rules we build by." />
           <Principles extra={['We count clicks per visit and try to remove one every release.', 'Isolation is enforced in the data layer, not by convention.', 'Leaving should be as easy as joining.', 'The audit trail is part of the product, not an add-on.', 'Drafts are visually distinct and never saved silently.']} />
         </div>
       </Section>
       <Section>
         <div className="sb-split">
-          <SectionHeader overline="How we build" title="For the technical reader." />
+          <SectionHeader title="For the technical reader." />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 'var(--reading-max)' }} className="sb-body">
             <p><strong>Open standards.</strong> Clinical records are FHIR R4 resources, so any system that speaks FHIR can read them.</p>
             <p><strong>A proven foundation.</strong> Medplum handles the data model, access control and audit, the parts that must not be clever.</p>
@@ -42,9 +41,8 @@ export default function AboutPage() {
       </Section>
       <Section tone="subtle">
         <div className="sb-team">
-          <img src="/img/founder.png" alt="Ankit Singh, founder of SaveBytes" className="sb-team-photo" />
+          <img src="/img/founder.jpg" alt="Ankit Singh, founder of SaveBytes" className="sb-team-photo" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
-            <SectionMark label="The team" />
             <h2 className="sb-display">We're small on purpose.</h2>
             <p className="sb-lead" style={{ color: 'var(--color-text-secondary)' }}>Right now SaveBytes is one person. If you write to us, the founder reads it.</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start', marginTop: 8, paddingTop: 20, borderTop: '1px solid var(--color-line)', alignSelf: 'stretch' }}>
