@@ -44,7 +44,7 @@ export default function ContactPage() {
           <h1 className="sb-display-xl">Talk to us.</h1>
           <p className="sb-lead" style={{ color: 'var(--color-text-secondary)' }}>Whether you run a clinic, want to partner, or just want to see what we're building, write to us. We reply within one working day.</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8, fontSize: 16 }}>
-            <span className="sb-contact-line"><Icon name="mail" size={20} color="var(--navy-500)" />{site.email.label}</span>
+            <a href={site.email.href} className="sb-contact-line"><Icon name="mail" size={20} color="var(--navy-500)" />{site.email.label}</a>
             {socialLinks.map(s => <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" className="sb-contact-line"><Icon name={s.icon} size={20} color="var(--navy-500)" /><span>{s.label}<span style={{ color: 'var(--color-text-muted)' }}> · {s.text}</span></span></a>)}
             <span className="sb-contact-line"><Icon name="map-pin" size={20} color="var(--navy-500)" />{site.location}</span>
           </div>

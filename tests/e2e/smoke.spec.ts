@@ -56,6 +56,15 @@ test('profile links are present, correct and open safely', async ({ page }) => {
   const flat = hrefs.map(([h]) => h);
   expect(flat).toContain('https://www.linkedin.com/in/ankit-singh-72b744225/');
   expect(flat).toContain('https://www.instagram.com/advaiticc');
+  expect(flat).toContain('https://ankit.savebytes.in/');
   expect(flat.some((h) => h!.startsWith('https://wa.me/918789286009'))).toBe(true);
   for (const [, rel] of hrefs) expect(rel).toContain('noopener');
+});
+
+test('contact email is the real address everywhere, with no bracketed placeholder', async ({ page }) => {
+  for (const path of ['/contact', '/privacy', '/about']) {
+    await page.goto(path, { waitUntil: 'networkidle' });
+    await expect(page.locator('footer a[href="mailto:ankit.singh4x@gmail.com"]')).toHaveCount(1);
+    await expect(page.locator('body')).not.toContainText('[hello@savebytes.in]');
+  }
 });
