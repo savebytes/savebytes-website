@@ -4,6 +4,7 @@ import DS from '../../components/ds';
 import { site } from '../../config/site';
 import { submitLead } from '../../lib/forms';
 import { track } from '../../lib/analytics';
+import { ROLES, LIMITS, validateField, validateLead, cleanLead } from '../../lib/validation/lead';
 import { Overline, SectionMark, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, Spotlight, FounderPhoto } from '../../components/sections';
 export default function ContactPage() {
   const { TextInput, Select, Textarea, Button, Icon, Link } = DS;
@@ -11,16 +12,28 @@ export default function ContactPage() {
   const [busy, setBusy] = React.useState(false);
   const [err, setErr] = React.useState({});
   const [sendErr, setSendErr] = React.useState('');
+  const onFieldBlur = e => {
+    const n = e.target.name; if (!n || n === 'company_website') return;
+    setErr(x => ({ ...x, [n]: validateField(n, e.target.value) }));
+  };
+  const onFieldChange = e => {
+    const n = e.target.name;
+    if (n && err[n]) setErr(x => ({ ...x, [n]: validateField(n, e.target.value) }));
+  };
   const submit = async e => {
     e.preventDefault();
-    const f = new FormData(e.target);
-    const n = {};
-    if (!f.get('name')) n.name = 'Enter your name';
-    if (!f.get('reach')) n.reach = 'Enter a phone number or email';
-    setErr(n); if (Object.keys(n).length) return;
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    const values = Object.fromEntries(f.entries());
+    const n = validateLead(values);
+    setErr(n);
+    const first = Object.keys(n)[0];
+    if (first) { form.elements[first]?.focus(); return; }
+    if (values.company_website) { setSent(true); return; } // honeypot: bots fill the hidden field, people never see it
     setBusy(true); setSendErr('');
-    const res = await submitLead(Object.fromEntries(f.entries()));
-    if (res.ok) { setSent(true); track('lead_submitted', { role: String(f.get('role') || '') }); }
+    const lead = cleanLead(values);
+    const res = await submitLead(lead);
+    if (res.ok) { setSent(true); track('lead_submitted', { role: lead.role }); }
     else setSendErr("That didn't send. Please try again, or write to us directly.");
     setBusy(false);
   };
@@ -42,15 +55,16 @@ export default function ContactPage() {
               <p className="sb-body" style={{ color: 'var(--color-text-secondary)' }}>We'll be in touch within a working day.</p>
             </div>
           ) : (
-            <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            <form onSubmit={submit} onBlur={onFieldBlur} onChange={onFieldChange} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               <div className="sb-grid-2" style={{ gap: 16 }}>
-                <TextInput name="name" label="Name" required error={err.name} size="lg" />
-                <TextInput name="clinic" label="Clinic or company" size="lg" />
-                <Select name="role" label="Role" placeholder="Choose one" size="lg" options={['Doctor', 'Clinic owner', 'Clinic manager', 'Partner', 'Other']} />
-                <TextInput name="city" label="City" size="lg" placeholder="Navi Mumbai" />
+                <TextInput name="name" label="Name" required error={err.name} size="lg" autoComplete="name" maxLength={LIMITS.name} />
+                <TextInput name="clinic" label="Clinic or company" error={err.clinic} size="lg" autoComplete="organization" maxLength={LIMITS.clinic} />
+                <Select name="role" label="Role" placeholder="Choose one" size="lg" error={err.role} options={[...ROLES]} />
+                <TextInput name="city" label="City" error={err.city} size="lg" placeholder="Navi Mumbai" autoComplete="address-level2" maxLength={LIMITS.city} />
               </div>
-              <TextInput name="reach" label="Phone or email" required error={err.reach} size="lg" />
-              <Textarea name="message" label="Message" optional rows={4} />
+              <TextInput name="reach" label="Phone or email" required error={err.reach} helper="Whichever you give us, that is how we will reply." size="lg" autoComplete="on" maxLength={LIMITS.reach} />
+              <Textarea name="message" label="Message" optional error={err.message} rows={4} maxLength={LIMITS.message} />
+              <div aria-hidden="true" style={{ position: 'absolute', left: -9999, width: 1, height: 1, overflow: 'hidden' }}><label>Leave this empty<input type="text" name="company_website" tabIndex={-1} autoComplete="off" /></label></div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
                 <Button type="submit" size="lg" loading={busy}>Send</Button>
                 {sendErr && <span role="alert" style={{ color: 'var(--color-danger)', fontSize: 14 }}>{sendErr}</span>}

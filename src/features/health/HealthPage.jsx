@@ -80,7 +80,6 @@ export default function HealthPage() {
           <div>
             <Timeline />
             <p className="sb-body" style={{ color: 'var(--color-text-muted)', fontStyle: 'normal' }}>Dates are deliberately missing. We'll add them when we're sure of them.</p>
-            <p style={{ marginTop: 12 }}><span className="sb-placeholder">[Update these labels from the Dashboard tab of the build tracker before launch, and again as each phase completes.]</span></p>
           </div>
         </div>
       </Section>
