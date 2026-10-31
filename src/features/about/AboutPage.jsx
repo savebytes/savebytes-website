@@ -3,6 +3,7 @@ import React from 'react';
 import DS from '../../components/ds';
 import { useGo } from '../../lib/navigation';
 import { Overline, SectionMark, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, Spotlight, FounderPhoto } from '../../components/sections';
+import SocialLinks from '../../components/sections/SocialLinks';
 export default function AboutPage() {
   const go = useGo();
   const { Avatar } = DS;
@@ -48,6 +49,7 @@ export default function AboutPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start', marginTop: 8, paddingTop: 20, borderTop: '1px solid var(--color-line)', alignSelf: 'stretch' }}>
               <span style={{ fontSize: 18, lineHeight: '26px', fontWeight: 600 }}>Ankit Singh</span>
               <span style={{ fontSize: 15, color: 'var(--color-text-muted)' }}>Founder &amp; CEO</span>
+              <SocialLinks style={{ marginLeft: -12, marginTop: 4 }} />
               <p className="sb-body" style={{ color: 'var(--color-text-secondary)', marginTop: 6, maxWidth: 520 }}>Building software that makes clinic work simpler, connects the reception, doctor, lab and pharmacy, and puts good digital records within reach of small clinics.</p>
             </div>
           </div>

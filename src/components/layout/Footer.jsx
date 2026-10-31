@@ -3,6 +3,7 @@ import React from 'react';
 import DS from '../ds';
 import { useGo } from '../../lib/navigation';
 import { site } from '../../config/site';
+import SocialLinks from '../sections/SocialLinks';
 import { footerColumns } from '../../config/routes';
 const { Logo, Link } = DS;
 
@@ -38,6 +39,7 @@ export default function Footer() {
             <Logo lockup="horizontal" tone="white" size={28} />
             <p style={{ color: 'var(--navy-200)', fontSize: 15, lineHeight: '24px' }}>SaveBytes builds fast, focused software. Made in Navi Mumbai.</p>
             <Link href={site.email.href} inverse>{site.email.label}</Link>
+            <SocialLinks inverse style={{ marginLeft: -12 }} />
           </div>
           {footerColumns.map(c => <React.Fragment key={c.title}>{col(c)}</React.Fragment>)}
         </div>

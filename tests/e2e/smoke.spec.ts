@@ -49,3 +49,13 @@ test('no placeholder "#" links; header logo and in-page links are real URLs', as
   await expect(page.getByRole('link', { name: 'SaveBytes home' })).toHaveAttribute('href', '/');
   await expect(page.getByRole('link', { name: 'Learn more' })).toHaveAttribute('href', '/health');
 });
+
+test('profile links are present, correct and open safely', async ({ page }) => {
+  await page.goto('/contact', { waitUntil: 'networkidle' });
+  const hrefs = await page.locator('a[target=_blank]').evaluateAll((as) => as.map((a) => [(a as HTMLAnchorElement).href, a.getAttribute('rel')]));
+  const flat = hrefs.map(([h]) => h);
+  expect(flat).toContain('https://www.linkedin.com/in/ankit-singh-72b744225/');
+  expect(flat).toContain('https://www.instagram.com/advaiticc');
+  expect(flat.some((h) => h!.startsWith('https://wa.me/918789286009'))).toBe(true);
+  for (const [, rel] of hrefs) expect(rel).toContain('noopener');
+});

@@ -108,8 +108,15 @@ table,.sb-mark-num,.sb-principle-num{font-variant-numeric:tabular-nums}
 }
 
 /* Touch: 44px controls and link hit areas on phones, tablets and any coarse pointer */
-footer .sb-footer-grid a{display:inline-block;padding:4px 0}
+footer .sb-footer-grid a:not(.sb-social){display:inline-block;padding:4px 0}
 @media (pointer:coarse),(max-width:1023px){
   :root{--control-sm:40px;--control-md:44px;--control-lg:52px}
-  footer .sb-footer-grid a{padding:10px 0}
+  footer .sb-footer-grid a:not(.sb-social){padding:10px 0}
 }
+
+.sb-social{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-sm);color:var(--color-text-secondary);transition:color var(--duration-fast) var(--ease-out),background var(--duration-fast) var(--ease-out)}
+.sb-social:hover{color:var(--color-text);background:var(--navy-100)}
+.sb-social[data-inverse]{color:var(--navy-200)}
+.sb-social[data-inverse]:hover{color:#fff;background:var(--navy-800)}
+.sb-contact-line{display:flex;align-items:center;gap:10px;color:var(--color-text-secondary);text-decoration:none}
+a.sb-contact-line:hover{color:var(--color-text);text-decoration:underline;text-underline-offset:.2em}
