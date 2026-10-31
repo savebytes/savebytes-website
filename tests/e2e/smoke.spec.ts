@@ -29,3 +29,13 @@ test('every page has a unique title', async ({ page }) => {
   }
   expect(titles.size).toBe(pages.length);
 });
+
+test('health consult panel fits its container with no sideways scroll', async ({ page }) => {
+  await page.goto('/health', { waitUntil: 'networkidle' });
+  const bad = await page.evaluate(() =>
+    [...document.querySelectorAll('.sb-rx-box, .sb-rx-box > div, .sb-pb')]
+      .filter((el) => el.scrollWidth > el.clientWidth + 1)
+      .map((el) => el.className || el.tagName),
+  );
+  expect(bad).toEqual([]);
+});

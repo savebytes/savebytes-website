@@ -1156,6 +1156,7 @@ function PrescriptionTable({
     lineHeight: '20px'
   };
   return /*#__PURE__*/React.createElement("div", {
+    className: "sb-rx-box",
     style: style
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1165,6 +1166,7 @@ function PrescriptionTable({
       background: '#fff'
     }
   }, /*#__PURE__*/React.createElement("table", {
+    className: "sb-rx",
     style: {
       width: '100%',
       borderCollapse: 'collapse'
@@ -1204,12 +1206,14 @@ function PrescriptionTable({
         background: v ? 'var(--navy-50)' : undefined
       }
     }, /*#__PURE__*/React.createElement("td", {
+      "data-label": "#",
       style: {
         ...td,
         fontFamily: 'var(--font-mono)',
         color: 'var(--color-text-muted)'
       }
     }, i + 1), /*#__PURE__*/React.createElement("td", {
+      "data-label": "Medicine",
       style: td
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -1243,6 +1247,7 @@ function PrescriptionTable({
         color: 'var(--color-text-secondary)'
       }
     }, m.voidReason))), /*#__PURE__*/React.createElement("td", {
+      "data-label": "Dose",
       style: {
         ...td,
         fontFamily: 'var(--font-mono)',
@@ -1250,6 +1255,7 @@ function PrescriptionTable({
         ...strike
       }
     }, m.dose), /*#__PURE__*/React.createElement("td", {
+      "data-label": "Frequency",
       style: {
         ...td,
         fontFamily: 'var(--font-mono)',
@@ -1258,12 +1264,14 @@ function PrescriptionTable({
         ...strike
       }
     }, m.frequency), /*#__PURE__*/React.createElement("td", {
+      "data-label": "When",
       style: {
         ...td,
         whiteSpace: 'nowrap',
         ...strike
       }
     }, m.when), /*#__PURE__*/React.createElement("td", {
+      "data-label": "Duration",
       style: {
         ...td,
         fontFamily: 'var(--font-mono)',
@@ -1271,12 +1279,14 @@ function PrescriptionTable({
         ...strike
       }
     }, m.duration), /*#__PURE__*/React.createElement("td", {
+      "data-label": "Instructions",
       style: {
         ...td,
         color: 'var(--color-text-secondary)',
         ...strike
       }
     }, m.instructions), actions && /*#__PURE__*/React.createElement("td", {
+      "data-label": "Actions",
       style: td
     }, actions(m, i)));
   })))), showLegend && /*#__PURE__*/React.createElement("div", {
@@ -1474,12 +1484,14 @@ function PatientBanner({
   const known = Array.isArray(allergies) && allergies.length > 0;
   const none = Array.isArray(allergies) && allergies.length === 0;
   return /*#__PURE__*/React.createElement("div", {
+    className: "sb-pb",
     style: {
       background: '#fff',
       borderBottom: '1px solid var(--color-line)',
       ...style
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "sb-pb-row",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -1488,6 +1500,7 @@ function PatientBanner({
       flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "sb-pb-id",
     style: {
       display: 'flex',
       alignItems: 'baseline',
@@ -1508,6 +1521,7 @@ function PatientBanner({
       whiteSpace: 'nowrap'
     }
   }, age, " \xB7 ", gender)), /*#__PURE__*/React.createElement("div", {
+    className: "sb-pb-meta",
     style: {
       display: 'flex',
       gap: 20,
@@ -1525,6 +1539,7 @@ function PatientBanner({
   }, mobile)), status && /*#__PURE__*/React.createElement(__ds_scope.VisitStatusBadge, {
     status: status
   }), actions), /*#__PURE__*/React.createElement("div", {
+    className: "sb-pb-alert",
     style: {
       display: 'flex',
       alignItems: 'center',
