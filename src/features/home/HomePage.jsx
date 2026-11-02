@@ -6,7 +6,34 @@ import CutThread from '../../components/sections/CutThread';
 import InkText from '../../components/motion/InkText';
 import Connector from '../../components/motion/Connector';
 import { useGo } from '../../lib/navigation';
-import { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, FounderPhoto } from '../../components/sections';
+import { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop } from '../../components/sections';
+/** A cropped, honest slice of each product's interface (fictional data), so the cards show the thing and not just name it. */
+function ProductPreview({ tone }) {
+  const { VitalsStrip, Icon } = DS;
+  if (tone === 'health') {
+    return (
+      <div data-ui className="sb-preview sb-preview-stack" aria-hidden="true">
+        <VitalsStrip dense vitals={[{ label: 'BP', value: '142/92', unit: 'mmHg', flag: 'high' }, { label: 'Pulse', value: 78, unit: 'bpm', time: '10:12 am' }, { label: 'Temp', value: '100.8', unit: '°F', flag: 'high' }, { label: 'SpO₂', value: 98, unit: '%', time: '10:12 am' }]} />
+        <div className="sb-role-row sb-rx-row">
+          <span className="sb-role-ic"><Icon name="pencil-line" size={16} /></span>
+          <span><span className="sb-role-name">Dolo 650 mg <span className="sb-rx-dose">1-0-1</span></span><span className="sb-role-scope">After food · 5 days</span></span>
+        </div>
+      </div>
+    );
+  }
+  const roles = [['user-plus', 'Reception', 'Register, book, queue'], ['clipboard-list', 'Nurse', 'Check in, vitals'], ['pencil-line', 'Doctor', 'Consult, prescribe, sign']];
+  return (
+    <div data-ui className="sb-preview sb-preview-roles" aria-hidden="true">
+      {roles.map(([ic, r, s]) => (
+        <div key={r} className="sb-role-row">
+          <span className="sb-role-ic"><Icon name={ic} size={16} /></span>
+          <span><span className="sb-role-name">{r}</span><span className="sb-role-scope">{s}</span></span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function HomePage({ headline = 'Software that wastes nothing.' }) {
   const go = useGo();
   const { Logo, Button, Link, Card, Badge, Icon, Avatar } = DS;
@@ -83,12 +110,10 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
       <div style={{ position: 'relative' }}>
         <CutThread />
         <Section tone="subtle">
-          <div className="sb-split">
-            <SectionHeader overline="01 / Why we exist" title="Most clinic software is built to be sold, not to be used." />
-            <Reveal style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 'var(--reading-max)' }}>
-              <InkText className="sb-h2" style={{ fontWeight: 500 }}>It comes with forty modules, a week of training and a screen full of buttons. So the doctor goes back to the paper pad, the receptionist keeps a register on the side, and the software becomes one more bill every month.</InkText>
-              <p className="sb-body-lg" style={{ color: 'var(--color-text-secondary)' }}>We think good software should feel like a good assistant: there when you need it, invisible when you don't. That means doing fewer things, and doing them properly.</p>
-            </Reveal>
+          <SectionHeader wide overline="01 / Why we exist" title="Most clinic software is built to be sold, not to be used." />
+          <div className="sb-why">
+            <InkText className="sb-h2" style={{ fontWeight: 500 }}>It comes with forty modules, a week of training and a screen full of buttons. So the doctor goes back to the paper pad, the receptionist keeps a register on the side, and the software becomes one more bill every month.</InkText>
+            <Reveal><p className="sb-body-lg" style={{ color: 'var(--color-text-secondary)' }}>We think good software should feel like a good assistant: there when you need it, invisible when you don't. That means doing fewer things, and doing them properly.</p></Reveal>
           </div>
         </Section>
 
@@ -100,6 +125,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
               <Reveal key={t} delay={i * 60} style={{ display: 'flex' }}>
                 <Card variant="website" style={{ flex: 1 }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, height: '100%' }}>
+                    <ProductPreview tone={tone} />
                     <Logo size={40} tone={tone} />
                     <h3 className="sb-h2">{t}</h3>
                     <p className="sb-body" style={{ color: 'var(--color-text-secondary)', flex: 1 }}>{d}</p>
@@ -146,13 +172,15 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
       </Section>
 
       <Section>
-        <div style={{ maxWidth: 'var(--reading-max)', display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <Overline>05 / The name</Overline>
-          <blockquote className="sb-h2" style={{ margin: 0, fontWeight: 500 }}>“I named my first GitHub repo SaveBytes because good software should use less: less memory, less time, less of your patience. It turned into a company.”</blockquote>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <FounderPhoto id="founder-home" size={48} />
-            <div><div style={{ fontWeight: 600, fontSize: 15, lineHeight: '22px' }}>Ankit Singh</div><div style={{ fontSize: 13, lineHeight: '18px', color: 'var(--color-text-muted)' }}>Founder &amp; CEO</div></div>
-            <span style={{ marginLeft: 'auto' }}><Link href="/about" arrow onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); go('about'); }}>Read the story</Link></span>
+        <div className="sb-team">
+          <img src="/img/founder.jpg" alt="Ankit Singh, founder of SaveBytes" width={640} height={634} loading="lazy" decoding="async" className="sb-team-photo" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 'var(--reading-max)' }}>
+            <Overline>05 / The name</Overline>
+            <blockquote className="sb-h2" style={{ margin: 0, fontWeight: 500 }}>“I named my first GitHub repo SaveBytes because good software should use less: less memory, less time, less of your patience. It turned into a company.”</blockquote>
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px 24px' }}>
+              <div><div style={{ fontWeight: 600, fontSize: 15, lineHeight: '22px' }}>Ankit Singh</div><div style={{ fontSize: 13, lineHeight: '18px', color: 'var(--color-text-muted)' }}>Founder &amp; CEO</div></div>
+              <Link href="/about" arrow onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); go('about'); }}>Read the story</Link>
+            </div>
           </div>
         </div>
       </Section>

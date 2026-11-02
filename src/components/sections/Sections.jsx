@@ -11,9 +11,9 @@ function Overline({ children, inverse }) {
   return <div className="sb-overline" style={{ color: inverse ? 'var(--navy-300)' : 'var(--color-text-muted)' }}>{children}</div>;
 }
 
-function SectionHeader({ overline, title, intro, inverse, center }) {
+function SectionHeader({ overline, title, intro, inverse, center, wide }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 760, textAlign: center ? 'center' : 'left', alignItems: center ? 'center' : 'flex-start', margin: center ? '0 auto' : undefined }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: wide ? 1000 : 760, textAlign: center ? 'center' : 'left', alignItems: center ? 'center' : 'flex-start', margin: center ? '0 auto' : undefined }}>
       {overline && <Overline inverse={inverse}>{overline}</Overline>}
       <h2 className="sb-display" style={{ color: inverse ? '#fff' : 'var(--color-text)' }}>{title}</h2>
       {intro && <p className="sb-lead" style={{ color: inverse ? 'var(--navy-200)' : 'var(--color-text-secondary)' }}>{intro}</p>}
@@ -50,7 +50,7 @@ function Reveal({ children, delay = 0, style }) {
 
 function ScreenPanel({ children, title = 'OPD queue · Today', style }) {
   return (
-    <div style={{ background: '#fff', border: '1px solid var(--color-line)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden', ...style }}>
+    <div data-ui style={{ background: '#fff', border: '1px solid var(--color-line)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden', ...style }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, height: 44, padding: '0 16px', borderBottom: '1px solid var(--color-line)', background: 'var(--color-surface-subtle)' }}>
         <span data-sb-mark style={{ display: 'flex' }}><Logo size={16} tone="health" /></span>
         <span style={{ fontSize: 13, lineHeight: '18px', fontWeight: 500 }}>{title}</span>
