@@ -200,3 +200,15 @@ a.sb-contact-line:hover{color:var(--color-text);text-decoration:underline;text-u
 .sb-preview-stack{display:flex;flex-direction:column;gap:12px}
 .sb-rx-row{border:1px solid var(--color-line);border-radius:var(--radius-md);background:var(--color-surface)}
 .sb-rx-dose{font-family:var(--font-mono);font-weight:500;margin-left:6px;color:var(--color-text-secondary)}
+
+/* Health hero: signing locks the record; the actions sit on the right of the footer */
+.sb-scene-actions{display:flex;align-items:center;gap:8px}
+.sb-locked{transition:opacity var(--duration-base) var(--ease-out)}
+.sb-locked[data-locked]{opacity:.72}
+
+.sb-scene-health{padding-top:185px}
+@media (max-width:639px){.sb-scene-health{padding-top:0}}
+
+/* Same height signed or not, so signing never moves the page */
+.sb-sign-slot{min-height:36px;display:flex;align-items:center}
+.sb-sign-hint{display:inline-flex;align-items:center;gap:8px;font-size:var(--text-label-size);line-height:var(--text-label-lh);color:var(--color-text-muted)}

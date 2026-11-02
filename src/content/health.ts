@@ -22,3 +22,14 @@ export const FAQ = [
     ["My staff aren't very technical.", "If they can use WhatsApp, they can use this. We'll set it up with you, in person, in Navi Mumbai and Mumbai."],
   ['What about ABDM and ABHA?', "It's on our roadmap. We'll say more when it's actually connected, not before."],
 ];
+
+/** Hero demo data: the consult card on the Health page (fictional). */
+export const HERO_VITALS = [
+  { label: 'BP', value: '142/92', unit: 'mmHg', flag: 'high' },
+  { label: 'Pulse', value: 78, unit: 'bpm', time: '10:12 am' },
+  { label: 'Temp', value: '100.8', unit: '°F', flag: 'high' },
+  { label: 'SpO₂', value: 98, unit: '%', time: '10:12 am' },
+];
+export const HERO_RX = [
+  { name: 'Dolo', strength: '650 mg', form: 'Tablet', generic: 'Paracetamol', dose: '1 tab', frequency: '1-0-1', when: 'After food', duration: '5 days' },
+];

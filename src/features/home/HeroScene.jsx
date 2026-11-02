@@ -2,6 +2,7 @@
 import React from 'react';
 import DS from '../../components/ds';
 import { ScreenPanel } from '../../components/sections';
+import usePointerParallax from '../../components/motion/usePointerParallax';
 import { QUEUE, PATIENTS } from '../../content/queue';
 
 const { OpdQueue, PatientBanner, Button } = DS;
@@ -31,17 +32,7 @@ export default function HeroScene({ panelRef, ready = true }) {
     setSaid([before && `${before.name} signed.`, after ? `${after.name} is now in consult.` : 'Queue is clear.'].filter(Boolean).join(' '));
   };
 
-  React.useEffect(() => {
-    const el = sceneRef.current; if (!el) return;
-    if (!window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return;
-    let raf = 0, x = 0, y = 0;
-    const paint = () => { raf = 0; el.style.setProperty('--px', x.toFixed(3)); el.style.setProperty('--py', y.toFixed(3)); };
-    const move = e => { const r = el.getBoundingClientRect(); x = ((e.clientX - r.left) / r.width - .5) * 2; y = ((e.clientY - r.top) / r.height - .5) * 2; if (!raf) raf = requestAnimationFrame(paint); };
-    const leave = () => { x = 0; y = 0; if (!raf) raf = requestAnimationFrame(paint); };
-    const host = el.closest('section') || el;
-    host.addEventListener('pointermove', move, { passive: true }); host.addEventListener('pointerleave', leave);
-    return () => { host.removeEventListener('pointermove', move); host.removeEventListener('pointerleave', leave); cancelAnimationFrame(raf); };
-  }, []);
+  usePointerParallax(sceneRef);
 
   return (
     <div ref={sceneRef} className="sb-scene" data-ready={ready || undefined}>

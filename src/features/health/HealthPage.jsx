@@ -4,6 +4,7 @@ import DS from '../../components/ds';
 import * as SEC from '../../components/sections';
 import * as HC from '../../content/health';
 import VisitFlow from './VisitFlow';
+import HealthHeroScene from './HealthHeroScene';
 import CutThread from '../../components/sections/CutThread';
 import Workspace from './Workspace';
 import { useGo } from '../../lib/navigation';
@@ -12,7 +13,7 @@ const { FAQ } = HC;
 
 export default function HealthPage() {
   const go = useGo();
-  const { Logo, Button, PatientBanner, VitalsStrip, PrescriptionTable } = DS;
+  const { Logo, Button } = DS;
   return (
     <>
       <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop tone="health" />
@@ -27,13 +28,7 @@ export default function HealthPage() {
               <Button size="lg" variant="secondary" onClick={() => document.getElementById('flow') && window.scrollTo({ top: document.getElementById('flow').offsetTop - 72, behavior: 'smooth' })}>See the visit flow</Button>
             </div>
           </div>
-          <ScreenPanel title="Consult · Token 07" style={{ alignSelf: 'center' }}>
-            <div style={{ margin: -16, marginBottom: 0 }}><PatientBanner name="Priya Deshmukh" age="34 y" gender="Female" born="14 Aug 1991" mrn="0004-2817" mobile="98201 44718" allergies={[{ substance: 'Penicillin', reaction: 'rash' }]} status="in-consult" /></div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 16 }}>
-              <VitalsStrip dense vitals={[{ label: 'BP', value: '142/92', unit: 'mmHg', flag: 'high' }, { label: 'Pulse', value: 78, unit: 'bpm', time: '10:12 am' }, { label: 'Temp', value: '100.8', unit: '°F', flag: 'high' }, { label: 'SpO₂', value: 98, unit: '%', time: '10:12 am' }]} />
-              <PrescriptionTable dense showLegend={false} items={[{ name: 'Dolo', strength: '650 mg', form: 'Tablet', generic: 'Paracetamol', dose: '1 tab', frequency: '1-0-1', when: 'After food', duration: '5 days' }]} />
-            </div>
-          </ScreenPanel>
+          <div className="sb-hero-visual"><HealthHeroScene /></div>
         </div>
       </section>
 
