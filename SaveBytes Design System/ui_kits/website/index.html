@@ -1,0 +1,64 @@
+<!-- @dsCard group="Website" viewport="1280x800" name="savebytes.in" subtitle="Home, Health, About, Contact — click-through" -->
+<!DOCTYPE html><html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SaveBytes · Software that wastes nothing</title>
+<link rel="icon" href="../../assets/logos/savebytes-favicon.svg">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+.sb-container{max-width:var(--content-max);margin:0 auto;padding:0 48px;box-sizing:content-box}
+.sb-section{padding:var(--space-24) 0}
+.sb-hero{padding:var(--space-24) 0 var(--space-24)}
+.sb-overline{font-family:var(--font-mono);font-size:12px;line-height:16px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.sb-display-xl{font-size:64px;line-height:68px;font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+.sb-display{font-size:44px;line-height:52px;font-weight:600;letter-spacing:-.015em;text-wrap:balance}
+.sb-h1{font-size:32px;line-height:40px;font-weight:600;letter-spacing:-.01em}
+.sb-h2{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.005em;text-wrap:pretty}
+.sb-h3{font-size:18px;line-height:26px;font-weight:600}
+.sb-lead,.sb-body-lg{font-size:18px;line-height:28px;text-wrap:pretty}
+.sb-body{font-size:16px;line-height:26px;text-wrap:pretty}
+.sb-placeholder{background:var(--color-warning-soft);color:var(--color-warning);font-family:var(--font-mono);font-size:14px;padding:0 4px;border-radius:4px}
+.sb-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.sb-hero-visual{position:relative;min-height:340px;display:flex;flex-direction:column;justify-content:center}
+.sb-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px}
+.sb-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.sb-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.sb-principle{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--color-line)}
+.sb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+.sb-diagram{display:flex;flex-direction:column;max-width:420px;width:100%;align-self:center;justify-self:end}
+.sb-thread{position:absolute;left:max(8px,calc((100% - 1200px)/2 - 40px));top:0;width:32px;height:100%;pointer-events:none;z-index:1}
+.sb-flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.sb-flow-step{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px;border:1px solid;border-radius:var(--radius-md);cursor:pointer;font-family:var(--font-sans);text-align:left;transition:background var(--duration-fast) var(--ease-out),border-color var(--duration-fast) var(--ease-out)}
+@media (max-width:1023px){.sb-container{padding:0 32px}.sb-hero-grid,.sb-split{grid-template-columns:1fr;gap:40px}.sb-grid-3{grid-template-columns:1fr 1fr}.sb-flow{grid-template-columns:repeat(3,1fr)}.sb-thread{display:none}.sb-diagram{justify-self:start}}
+@media (max-width:639px){.sb-container{padding:0 20px}.sb-section,.sb-hero{padding:var(--space-16) 0}.sb-display-xl{font-size:40px;line-height:44px}.sb-display{font-size:32px;line-height:38px}.sb-grid-2,.sb-grid-3{grid-template-columns:1fr}.sb-flow{grid-template-columns:1fr 1fr}.sb-footer-grid{grid-template-columns:1fr 1fr}}
+</style></head><body><div id="root"></div>
+<script type="text/babel" src="Sections.jsx"></script>
+<script type="text/babel" src="Home.jsx"></script>
+<script type="text/babel" src="Health.jsx"></script>
+<script type="text/babel" src="About.jsx"></script>
+<script type="text/babel" src="Contact.jsx"></script>
+<script type="text/babel">
+const { SiteHeader } = window.SaveBytesDesignSystem_ad9a34;
+const LINKS = [{ id: 'health', label: 'Health' }, { id: 'platform', label: 'Platform' }, { id: 'about', label: 'About' }, { id: 'contact', label: 'Contact' }];
+function App() {
+  const [page, setPage] = React.useState(() => localStorage.getItem('sb-web-page') || 'home');
+  const [scrolled, setScrolled] = React.useState(false);
+  const [mobile, setMobile] = React.useState(window.innerWidth < 760);
+  React.useEffect(() => { const s = () => setScrolled(window.scrollY > 8); const r = () => setMobile(window.innerWidth < 760); window.addEventListener('scroll', s, { passive: true }); window.addEventListener('resize', r); return () => { window.removeEventListener('scroll', s); window.removeEventListener('resize', r); }; }, []);
+  const go = id => {
+    if (id === 'platform') { setPage('home'); localStorage.setItem('sb-web-page', 'home'); setTimeout(() => { const el = document.getElementById('platform'); el && window.scrollTo({ top: el.offsetTop - 72, behavior: 'smooth' }); }, 50); return; }
+    if (id === 'privacy') id = 'contact';
+    setPage(id); localStorage.setItem('sb-web-page', id); window.scrollTo(0, 0);
+  };
+  const P = { home: HomePage, health: HealthPage, about: AboutPage, contact: ContactPage }[page] || HomePage;
+  return (
+    <>
+      <SiteHeader links={LINKS} active={page} onNavigate={go} onCta={() => go('contact')} scrolled={scrolled} mobile={mobile} tone={page === 'health' ? 'health' : 'brand'} />
+      <main style={{ marginTop: 'calc(-1 * var(--header-height))', paddingTop: 'var(--header-height)' }}><P go={go} /></main>
+      <Footer go={go} />
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script></body></html>
