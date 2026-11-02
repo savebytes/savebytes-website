@@ -42,6 +42,15 @@ test.describe('glass header', () => {
     await ctx.close();
   });
 
+  test('the header CTA is fully rounded to match the pill, at the top and when scrolled', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+    const radius = () => page.locator('.sb-hdr-cta button').evaluate((el) => getComputedStyle(el).borderRadius);
+    expect(await radius()).toBe('9999px');
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await expect(page.locator('.sb-hdr')).toHaveAttribute('data-state', 'pill');
+    expect(await radius()).toBe('9999px');
+  });
+
   test('current page is marked in the nav', async ({ page }) => {
     await page.goto('/about', { waitUntil: 'networkidle' });
     await expect(page.locator('.sb-hdr-nav a[aria-current=page]')).toHaveText('About');

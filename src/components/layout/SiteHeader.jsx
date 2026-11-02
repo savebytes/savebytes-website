@@ -60,7 +60,7 @@ export default function SiteHeader({ links = [], active, homeHref = '/', ctaLabe
               ))}
             </nav>
             <div className="sb-hdr-end">
-              <span className="sb-hdr-cta"><Button onClick={onCta}>{ctaLabel}</Button></span>
+              <span className="sb-hdr-cta"><Button onClick={onCta} style={{ borderRadius: 'var(--radius-full)', paddingInline: 20 }}>{ctaLabel}</Button></span>
               <button ref={toggle} type="button" className="sb-hdr-toggle" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="sb-menu" onClick={() => setOpen(o => !o)}>
                 <Icon name={open ? 'x' : 'menu'} size={20} />
               </button>

@@ -144,7 +144,7 @@ a.sb-contact-line:hover{color:var(--color-text);text-decoration:underline;text-u
   padding:0 max(48px,calc((100% - 1200px)/2));
   transition:padding var(--duration-slow) var(--ease-out);
 }
-.sb-hdr[data-state=pill] .sb-hdr-in{padding:0 12px 0 24px}
+.sb-hdr[data-state=pill] .sb-hdr-in{padding:0 8px 0 24px}
 .sb-hdr-logo{display:flex;justify-self:start;border-radius:var(--radius-xs)}
 .sb-hdr-nav{display:flex;gap:28px;justify-self:center}
 .sb-hdr-nav a,.sb-hdr-sheet a{position:relative;text-decoration:none}
