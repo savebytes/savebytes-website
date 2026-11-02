@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import DS from '../../components/ds';
+import HeroScene from './HeroScene';
 import { useGo } from '../../lib/navigation';
 import { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, FounderPhoto } from '../../components/sections';
 function CutThread() {
@@ -26,6 +27,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
   const go = useGo();
   const { Logo, Button, Link, Card, Badge, Icon, Avatar } = DS;
   const [playing, setPlaying] = React.useState(false);
+  const ready = !playing;
   const logoRef = React.useRef(null);
   const panelRef = React.useRef(null);
 
@@ -89,7 +91,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
           </div>
           <div className="sb-hero-visual">
             {playing && <div aria-hidden="true" style={{ position: 'absolute', left: 0, top: '50%', marginTop: -80, zIndex: 2, pointerEvents: 'none' }}><div ref={logoRef} style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}><Logo size={160} animate="intro" /></div></div>}
-            <div ref={panelRef}><QueuePanel /></div>
+            <HeroScene panelRef={panelRef} ready={ready} />
           </div>
         </div>
       </section>
