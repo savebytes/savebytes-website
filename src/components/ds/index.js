@@ -173,6 +173,7 @@ function VitalsStrip({
   }, v.value == null ? '—' : v.value), v.unit && /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
+      lineHeight: '16px',
       color: 'var(--color-text-muted)'
     }
   }, v.unit)), /*#__PURE__*/React.createElement("div", {
@@ -180,7 +181,7 @@ function VitalsStrip({
       marginTop: 2,
       minHeight: 18,
       fontSize: 12,
-      lineHeight: '18px',
+      lineHeight: '16px',
       color: 'var(--color-text-muted)',
       fontFamily: v.flag ? undefined : 'var(--font-mono)'
     }
@@ -1522,6 +1523,7 @@ function PatientBanner({
   }, name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 14,
+      lineHeight: '20px',
       color: 'var(--color-text-secondary)',
       whiteSpace: 'nowrap'
     }

@@ -6,8 +6,7 @@ import * as HC from '../../content/health';
 import VisitFlow from './VisitFlow';
 import Workspace from './Workspace';
 import { useGo } from '../../lib/navigation';
-const { Badge } = DS;
-const { Overline, SectionMark, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, Principles, Timeline, CtaBand, HeroBackdrop } = SEC;
+const { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, Principles, Timeline, CtaBand, HeroBackdrop } = SEC;
 const { FAQ } = HC;
 
 export default function HealthPage() {
@@ -18,7 +17,8 @@ export default function HealthPage() {
       <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop tone="health" />
         <div className="sb-container sb-hero-grid">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <div><Badge tone="neutral" dot>In development</Badge></div>
+            <Logo lockup="horizontal" tone="health" size={32} />
+            <Overline>SaveBytes Health · In development</Overline>
             <h1 className="sb-display-xl">The clinic day, done properly.</h1>
             <p className="sb-lead" style={{ color: 'var(--color-text-secondary)', maxWidth: 560 }}>An EHR built for Indian clinics with two to five doctors. Book, check in, take vitals, consult, prescribe, sign, without the screen getting in the way.</p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 8 }}>
@@ -37,14 +37,14 @@ export default function HealthPage() {
       </section>
 
       <Section tone="subtle" id="flow">
-        <SectionHeader title="One patient. Five steps. No paper register on the side." />
+        <SectionHeader overline="01 / A visit, start to finish" title="One patient. Five steps. No paper register on the side." />
         <VisitFlow />
       </Section>
 
       <Section tone="inverse" grid id="workspace">
         <div className="sb-split">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <SectionHeader inverse title="One workspace for the whole clinic." />
+            <SectionHeader inverse overline="02 / Where we're headed" title="One workspace for the whole clinic." />
             <p className="sb-body-lg" style={{ color: 'var(--navy-200)', maxWidth: 'var(--reading-max)' }}>A busy clinic often runs on a separate tool for each counter: one for the pharmacy, one for lab reports, one for prescriptions. None of them talk to each other, so the patient carries paper from one desk to the next.</p>
             <p className="sb-body-lg" style={{ color: 'var(--navy-200)', maxWidth: 'var(--reading-max)' }}>We're building the visit as one connected record. The doctor orders a test and the lab already has it. The report comes back and the doctor knows.</p>
             <p className="sb-body" style={{ color: 'var(--navy-300)', maxWidth: 'var(--reading-max)' }}>The first release covers the OPD. Lab, results and pharmacy come after, on the same patient record.</p>
@@ -54,7 +54,7 @@ export default function HealthPage() {
       </Section>
 
       <Section>
-        <SectionHeader title="Answers to the questions doctors actually ask." />
+        <SectionHeader overline="03 / Straight answers" title="Answers to the questions doctors actually ask." />
         <div className="sb-grid-3" style={{ marginTop: 48 }}>
           {FAQ.map(([q, a, ph], i) => (
             <Reveal key={q} delay={(i % 3) * 60}>
@@ -69,14 +69,14 @@ export default function HealthPage() {
 
       <Section tone="subtle">
         <div className="sb-split">
-          <SectionHeader title="One chart, shaped to how you practise." />
+          <SectionHeader overline="04 / Specialties" title="One chart, shaped to how you practise." />
           <p className="sb-body-lg" style={{ color: 'var(--color-text-secondary)', maxWidth: 'var(--reading-max)' }}>Specialties are add-ons with their own forms, vitals and favourite diagnoses (for example growth charts for paediatrics), all on the same patient chart. We'll build them one at a time, starting with what our first clinics need.</p>
         </div>
       </Section>
 
       <Section>
         <div className="sb-split">
-          <SectionHeader title="An honest roadmap." />
+          <SectionHeader overline="05 / What's being built now" title="An honest roadmap." />
           <div>
             <Timeline />
             <p className="sb-body" style={{ color: 'var(--color-text-muted)', fontStyle: 'normal' }}>Dates are deliberately missing. We'll add them when we're sure of them.</p>

@@ -5,7 +5,7 @@ import { site, socialLinks } from '../../config/site';
 import { submitLead } from '../../lib/forms';
 import { track } from '../../lib/analytics';
 import { ROLES, LIMITS, validateField, validateLead, cleanLead } from '../../lib/validation/lead';
-import { Overline, SectionMark, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, Spotlight, FounderPhoto } from '../../components/sections';
+import { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, FounderPhoto } from '../../components/sections';
 export default function ContactPage() {
   const { TextInput, Select, Textarea, Button, Icon, Link } = DS;
   const [sent, setSent] = React.useState(false);
@@ -41,9 +41,10 @@ export default function ContactPage() {
     <section className="sb-section sb-hero sb-has-backdrop"><HeroBackdrop />
       <div className="sb-container sb-split" style={{ alignItems: 'start' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <Overline>Contact · Early access</Overline>
           <h1 className="sb-display-xl">Talk to us.</h1>
           <p className="sb-lead" style={{ color: 'var(--color-text-secondary)' }}>Whether you run a clinic, want to partner, or just want to see what we're building, write to us. We reply within one working day.</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8, fontSize: 16 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8, fontSize: 16, lineHeight: '26px' }}>
             <a href={site.email.href} className="sb-contact-line"><Icon name="mail" size={20} color="var(--navy-500)" />{site.email.label}</a>
             {socialLinks.map(s => <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" className="sb-contact-line"><Icon name={s.icon} size={20} color="var(--navy-500)" /><span>{s.label}<span style={{ color: 'var(--color-text-muted)' }}> · {s.text}</span></span></a>)}
             <span className="sb-contact-line"><Icon name="map-pin" size={20} color="var(--navy-500)" />{site.location}</span>
@@ -69,8 +70,8 @@ export default function ContactPage() {
               <div aria-hidden="true" style={{ position: 'absolute', left: -9999, width: 1, height: 1, overflow: 'hidden' }}><label>Leave this empty<input type="text" name="company_website" tabIndex={-1} autoComplete="off" /></label></div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
                 <Button type="submit" size="lg" loading={busy}>Send</Button>
-                {sendErr && <span role="alert" style={{ color: 'var(--color-danger)', fontSize: 14 }}>{sendErr}</span>}
-                <span style={{ fontSize: 13, color: 'var(--color-text-muted)', flex: 1, minWidth: 200 }}>We use these details only to reply to you. No newsletters unless you ask.</span>
+                {sendErr && <span role="alert" style={{ color: 'var(--color-danger)', fontSize: 14, lineHeight: '20px' }}>{sendErr}</span>}
+                <span style={{ fontSize: 13, lineHeight: '18px', color: 'var(--color-text-muted)', flex: 1, minWidth: 200 }}>We use these details only to reply to you. No newsletters unless you ask.</span>
               </div>
             </form>
           )}

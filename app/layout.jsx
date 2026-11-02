@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   const { provider, src, siteId } = analyticsConfig;
   return (
     <html lang="en-IN">
-      <body className="sb-compact">
+      <body>
         <SiteShell>{children}</SiteShell>
         {provider === 'plausible' && src && <Script defer data-domain={siteId || 'savebytes.in'} src={src} strategy="afterInteractive" />}
         {provider === 'umami' && src && <Script defer data-website-id={siteId} src={src} strategy="afterInteractive" />}

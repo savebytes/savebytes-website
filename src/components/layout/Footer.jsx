@@ -28,7 +28,7 @@ export default function Footer() {
   const col = ({ title: t, links }) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
       <div className="sb-overline" style={{ color: 'var(--navy-400)' }}>{t}</div>
-      {links.map(({ id, label: l, href }) => <a key={id} href={href} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); go(id); }} style={{ color: 'var(--navy-200)', fontSize: 15 }}>{l}</a>)}
+      {links.map(({ id, label: l, href }) => <a key={id} href={href} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); go(id); }} style={{ color: 'var(--navy-200)', fontSize: 14, lineHeight: '20px' }}>{l}</a>)}
     </div>
   );
   return (
@@ -37,13 +37,13 @@ export default function Footer() {
         <div className="sb-footer-grid">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 320 }}>
             <Logo lockup="horizontal" tone="white" size={28} />
-            <p style={{ color: 'var(--navy-200)', fontSize: 15, lineHeight: '24px' }}>SaveBytes builds fast, focused software. Made in Navi Mumbai.</p>
+            <p style={{ color: 'var(--navy-200)', fontSize: 14, lineHeight: '20px' }}>SaveBytes builds fast, focused software. Made in Navi Mumbai.</p>
             <Link href={site.email.href} inverse>{site.email.label}</Link>
             <SocialLinks inverse style={{ marginLeft: -12 }} />
           </div>
           {footerColumns.map(c => <React.Fragment key={c.title}>{col(c)}</React.Fragment>)}
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12, marginTop: 48, paddingTop: 20, borderTop: '1px solid var(--navy-800)', fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--navy-400)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12, marginTop: 48, paddingTop: 20, borderTop: '1px solid var(--navy-800)', fontFamily: 'var(--font-mono)', fontSize: 12, lineHeight: '16px', color: 'var(--navy-400)' }}>
           <span>© 2026 SaveBytes</span><span title="Measured in your browser from every file this page loaded">{kb ? 'This page weighs ' + kb.toLocaleString('en-IN') + ' KB.' : 'Weighing this page…'}</span>
         </div>
       </div>

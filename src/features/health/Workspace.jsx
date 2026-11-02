@@ -18,10 +18,10 @@ export default function Workspace() {
               <span className="sb-ws-icon"><Icon name={ic} size={20} /></span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
-                  <span style={{ fontWeight: 600, fontSize: 16, color: '#fff' }}>{t}</span>
+                  <span style={{ fontWeight: 600, fontSize: 16, lineHeight: '26px', color: '#fff' }}>{t}</span>
                   <span className="sb-ws-status">{st}</span>
                 </div>
-                <span style={{ fontSize: 14, lineHeight: '22px', color: 'var(--navy-200)' }}>{d}</span>
+                <span style={{ fontSize: 14, lineHeight: '20px', color: 'var(--navy-200)' }}>{d}</span>
                 {i === 4 && (
                   <div className="sb-ws-note" role="img" aria-label="Example notification: CBC report ready for Priya Deshmukh, token 07, marked urgent">
                     <span style={{ color: 'var(--color-danger)', display: 'flex' }}><Icon name="circle-alert" size={16} /></span>
