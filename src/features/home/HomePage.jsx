@@ -2,27 +2,11 @@
 import React from 'react';
 import DS from '../../components/ds';
 import HeroScene from './HeroScene';
+import CutThread from '../../components/sections/CutThread';
+import InkText from '../../components/motion/InkText';
+import Connector from '../../components/motion/Connector';
 import { useGo } from '../../lib/navigation';
 import { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, FounderPhoto } from '../../components/sections';
-function CutThread() {
-  const ref = React.useRef(null);
-  const [p, setP] = React.useState(0);
-  React.useEffect(() => {
-    const on = () => {
-      const el = ref.current; if (!el) return;
-      const r = el.parentElement.getBoundingClientRect();
-      const vh = window.innerHeight;
-      setP(Math.max(0, Math.min(1, (vh * 0.6 - r.top) / r.height)));
-    };
-    on(); window.addEventListener('scroll', on, { passive: true }); return () => window.removeEventListener('scroll', on);
-  }, []);
-  return (
-    <svg ref={ref} className="sb-thread" viewBox="0 0 48 400" preserveAspectRatio="none" aria-hidden="true">
-      <path pathLength="1" d="M34 0C34 100 14 100 14 200C14 300 34 300 34 400" fill="none" stroke="var(--navy-200)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" strokeDasharray="1" strokeDashoffset={1 - p} />
-    </svg>
-  );
-}
-
 export default function HomePage({ headline = 'Software that wastes nothing.' }) {
   const go = useGo();
   const { Logo, Button, Link, Card, Badge, Icon, Avatar } = DS;
@@ -102,7 +86,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
           <div className="sb-split">
             <SectionHeader overline="01 / Why we exist" title="Most clinic software is built to be sold, not to be used." />
             <Reveal style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 'var(--reading-max)' }}>
-              <p className="sb-body-lg">It comes with forty modules, a week of training and a screen full of buttons. So the doctor goes back to the paper pad, the receptionist keeps a register on the side, and the software becomes one more bill every month.</p>
+              <InkText className="sb-h2" style={{ fontWeight: 500 }}>It comes with forty modules, a week of training and a screen full of buttons. So the doctor goes back to the paper pad, the receptionist keeps a register on the side, and the software becomes one more bill every month.</InkText>
               <p className="sb-body-lg" style={{ color: 'var(--color-text-secondary)' }}>We think good software should feel like a good assistant: there when you need it, invisible when you don't. That means doing fewer things, and doing them properly.</p>
             </Reveal>
           </div>
@@ -150,7 +134,7 @@ export default function HomePage({ headline = 'Software that wastes nothing.' })
           <div className="sb-diagram" aria-label="Your clinic connects to SaveBytes Health, which stores records in an isolated FHIR data space">
             {[['building-2', 'Your clinic', 'Reception, nurse, doctor'], ['layout-panel-left', 'SaveBytes Health', 'One fast screen per job'], ['database', 'Isolated FHIR data space', 'Yours. Export anytime.']].map(([ic, t, d], i) => (
               <React.Fragment key={t}>
-                {i > 0 && <span aria-hidden="true" style={{ width: 1, height: 28, background: 'var(--navy-700)', margin: '0 auto' }} />}
+                {i > 0 && <Connector delay={i * 140} />}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px', border: '1px solid ' + (i === 1 ? 'var(--blue-400)' : 'var(--navy-700)'), borderRadius: 'var(--radius-md)', background: 'var(--navy-900)' }}>
                   <span style={{ color: i === 1 ? 'var(--blue-400)' : 'var(--navy-300)', display: 'flex' }}><Icon name={ic} size={20} /></span>
                   <div><div style={{ fontWeight: 600, fontSize: 15, lineHeight: '22px', color: '#fff' }}>{t}</div><div style={{ fontSize: 13, lineHeight: '18px', color: 'var(--navy-300)' }}>{d}</div></div>

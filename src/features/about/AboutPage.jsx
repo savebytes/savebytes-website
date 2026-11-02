@@ -3,6 +3,8 @@ import React from 'react';
 import DS from '../../components/ds';
 import { useGo } from '../../lib/navigation';
 import { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, QUEUE, Principles, Timeline, CtaBand, HeroBackdrop, FounderPhoto } from '../../components/sections';
+import CutThread from '../../components/sections/CutThread';
+import InkText from '../../components/motion/InkText';
 import SocialLinks from '../../components/sections/SocialLinks';
 export default function AboutPage() {
   const go = useGo();
@@ -15,9 +17,11 @@ export default function AboutPage() {
           <h1 className="sb-display-xl" style={{ maxWidth: 900 }}>It started as a repository name.</h1>
         </div>
       </section>
+      <div style={{ position: 'relative' }}>
+      <CutThread />
       <Section style={{ paddingTop: 0 }}>
         <div style={{ maxWidth: 'var(--reading-max)', display: 'flex', flexDirection: 'column', gap: 24 }} className="sb-body-lg">
-          <p>In my first year of engineering college I was naming a GitHub repository and went through a long list of bad ideas. SaveBytes stuck. As an engineer you learn quickly that good software is software that uses less: less memory, fewer steps, less waiting. I've tried to write code that way ever since.</p>
+          <InkText>In my first year of engineering college I was naming a GitHub repository and went through a long list of bad ideas. SaveBytes stuck. As an engineer you learn quickly that good software is software that uses less: less memory, fewer steps, less waiting. I've tried to write code that way ever since.</InkText>
           <p>Years later the name was still with me: on my GitHub, on my portfolio at savebytes.in, in how I think about building things. So when I decided to start a company, it already had a name.</p>
           <p>We're starting with healthcare because it's where wasted time hurts the most. A doctor in a busy clinic sees dozens of patients a day, and most software makes that harder. We want to build the opposite.</p>
           <p>Near where I live there are clinics with a queue out the door every morning, and almost all of it runs on paper. Entries go in a register. Token numbers are written by hand. Payments go in a notebook. The places that do use software usually have a different tool for each counter: one for the pharmacy, one for lab reports, one for prescriptions. None of them talk to each other, so the patient ends up carrying the paper between desks.</p>
@@ -57,6 +61,7 @@ export default function AboutPage() {
           </div>
         </div>
       </Section>
+      </div>
       <CtaBand onCta={() => go('contact')} />
     </>
   );

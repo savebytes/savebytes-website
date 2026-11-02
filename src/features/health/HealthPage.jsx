@@ -4,6 +4,7 @@ import DS from '../../components/ds';
 import * as SEC from '../../components/sections';
 import * as HC from '../../content/health';
 import VisitFlow from './VisitFlow';
+import CutThread from '../../components/sections/CutThread';
 import Workspace from './Workspace';
 import { useGo } from '../../lib/navigation';
 const { Overline, SectionHeader, Section, Reveal, ScreenPanel, QueuePanel, Principles, Timeline, CtaBand, HeroBackdrop } = SEC;
@@ -36,8 +37,9 @@ export default function HealthPage() {
         </div>
       </section>
 
+      <div style={{ position: 'relative' }}>
+      <CutThread />
       <Section tone="subtle" id="flow">
-        <SectionHeader overline="01 / A visit, start to finish" title="One patient. Five steps. No paper register on the side." />
         <VisitFlow />
       </Section>
 
@@ -84,6 +86,7 @@ export default function HealthPage() {
         </div>
       </Section>
 
+      </div>
       <CtaBand title="Want to shape SaveBytes Health?" body="We're looking for a few owner-doctors to use it first and tell us what's wrong with it. You get it early, with a direct line to the people building it." onCta={() => go('contact')} />
     </>
   );

@@ -175,3 +175,11 @@ a.sb-contact-line:hover{color:var(--color-text);text-decoration:underline;text-u
 .sb-scene-hint{font-size:var(--text-caption-size);line-height:var(--text-caption-lh);color:var(--color-text-muted)}
 @media (max-width:1023px){.sb-scene-front{width:100%}.sb-scene-back{width:92%}}
 @media (max-width:639px){.sb-scene{padding-top:0}.sb-scene-back{display:none}.sb-scene-front{width:100%;transform:none}}
+
+/* Ink statement: words fill from muted to full ink as the block scrolls through. Full ink without JS or with reduced motion. */
+.sb-ink.is-live .sb-ink-w{opacity:calc(.28 + .72 * clamp(0, var(--ink) * (var(--n) + 5) - var(--i), 1));transition:opacity 140ms linear}
+@media (prefers-reduced-motion:reduce){.sb-ink.is-live .sb-ink-w{opacity:1;transition:none}}
+
+/* Visit flow as a scroll scene (desktop): the stage sticks while five steps play as you scroll through the track */
+.sb-flowscene{height:300vh}
+.sb-flowscene-stick{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:var(--header-height)}

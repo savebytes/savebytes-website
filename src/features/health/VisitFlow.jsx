@@ -20,7 +20,32 @@ export default function VisitFlow() {
   const [s, setS] = React.useState(0);
   const [auto, setAuto] = React.useState(true);
   const [inView, setInView] = React.useState(false);
+  const [scrolly, setScrolly] = React.useState(false);
+  const [frac, setFrac] = React.useState(0);
   const ref = React.useRef(null);
+  const track = React.useRef(null);
+  // Desktop with motion allowed: the stage sticks and scrolling through the section walks the five steps.
+  React.useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');
+    const sync = () => setScrolly(mq.matches);
+    sync(); mq.addEventListener('change', sync); return () => mq.removeEventListener('change', sync);
+  }, []);
+  React.useEffect(() => {
+    if (!scrolly) return;
+    const el = track.current; if (!el) return;
+    let raf = 0;
+    const paint = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect(), travel = r.height - window.innerHeight;
+      const p = Math.max(0, Math.min(0.9999, -r.top / Math.max(1, travel)));
+      const n = VISIT_STEPS.length, i = Math.floor(p * n);
+      setS(i); setFrac(p * n - i);
+    };
+    const tick = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { window.addEventListener('scroll', tick, { passive: true }); tick(); } else window.removeEventListener('scroll', tick); }, { rootMargin: '10% 0px' });
+    io.observe(el); setAuto(false);
+    return () => { io.disconnect(); window.removeEventListener('scroll', tick); cancelAnimationFrame(raf); };
+  }, [scrolly]);
   React.useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setAuto(false); return; }
     const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
@@ -31,9 +56,16 @@ export default function VisitFlow() {
     const t = setTimeout(() => { if (s === VISIT_STEPS.length - 1) setAuto(false); else setS(s + 1); }, 3200);
     return () => clearTimeout(t);
   }, [s, auto, inView]);
-  const pick = i => { setAuto(false); setS(i); };
-  return (
-    <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 32, marginTop: 48 }}>
+  const pick = i => {
+    setAuto(false);
+    if (scrolly && track.current) {
+      const r = track.current.getBoundingClientRect(), travel = r.height - window.innerHeight;
+      window.scrollTo({ top: window.scrollY + r.top + travel * ((i + 0.5) / VISIT_STEPS.length), behavior: 'smooth' });
+    } else setS(i);
+  };
+  const header = <SectionHeader overline="01 / A visit, start to finish" title="One patient. Five steps. No paper register on the side." />;
+  const stage = (
+    <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 32, marginTop: scrolly ? 32 : 48 }}>
       <ol className="sb-flow" role="tablist">
         {VISIT_STEPS.map(([t, , st], i) => (
           <li key={t}>
@@ -41,12 +73,12 @@ export default function VisitFlow() {
               <span style={{ fontSize: 13, lineHeight: '18px', fontWeight: 500, color: i <= s ? 'var(--color-brand)' : 'var(--color-text-muted)' }}>Step {i + 1}</span>
               <span style={{ fontWeight: 600, fontSize: 15, lineHeight: '22px', color: 'var(--color-text)' }}>{t.replace('.', '')}</span>
               <VisitStatusBadge status={st} />
-              <span aria-hidden="true" style={{ alignSelf: 'stretch', height: 2, borderRadius: 1, background: 'var(--navy-200)', overflow: 'hidden', marginTop: 4 }}><span key={s + '-' + auto} style={{ display: 'block', height: '100%', background: 'var(--color-brand)', width: i < s ? '100%' : i === s ? (auto && inView ? '100%' : '100%') : '0%', transformOrigin: 'left', animation: i === s && auto && inView ? 'sb-flow-fill 3200ms linear both' : 'none' }}></span></span>
+              <span aria-hidden="true" style={{ alignSelf: 'stretch', height: 2, borderRadius: 1, background: 'var(--navy-200)', overflow: 'hidden', marginTop: 4 }}><span key={s + '-' + auto} style={{ display: 'block', height: '100%', background: 'var(--color-brand)', width: i < s ? '100%' : i === s ? (scrolly ? (frac * 100).toFixed(1) + '%' : '100%') : '0%', transformOrigin: 'left', animation: i === s && !scrolly && auto && inView ? 'sb-flow-fill 3200ms linear both' : 'none' }}></span></span>
             </button>
           </li>
         ))}
       </ol>
-      <div className="sb-split" style={{ alignItems: 'start' }}>
+      <div className="sb-split" style={{ alignItems: 'start', minHeight: scrolly ? 260 : undefined }}>
         <div key={'t' + s} style={{ animation: 'sb-rise 320ms var(--ease-out)' }}>
           <h3 className="sb-h2">{VISIT_STEPS[s][0]}</h3>
           <p className="sb-body-lg" style={{ color: 'var(--color-text-secondary)', marginTop: 12 }}>{VISIT_STEPS[s][1]}</p>
@@ -55,6 +87,5 @@ export default function VisitFlow() {
       </div>
     </div>
   );
+  return scrolly ? <div ref={track} className="sb-flowscene"><div className="sb-flowscene-stick">{header}{stage}</div></div> : <>{header}{stage}</>;
 }
-
-
