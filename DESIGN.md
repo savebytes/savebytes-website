@@ -230,7 +230,7 @@ The footer states the page's real weight ("This page weighs N KB."). It is compu
 The one picture on a product page, a component named in the product's registry entry and drawn in src/products/screens.jsx with fictional data. It sits on the tone-step mat (padding clamp 20px to 72px, max 920px inside).
 
 ### Growing the site
-- **A new product** is one new entry in src/products/index.js. That entry gets its home directory row, its header and footer nav link, its page at /slug (from the standard product template: lede with action, optional picture, what it does, coming soon, data, close) and its sitemap entry. A product leaves out any block it has nothing for.
+- **A new product** is one new entry in src/products/index.js plus a four-line page file at app/(marketing)/<slug>/page.jsx (copy app/(marketing)/health/page.jsx and change the slug). The entry gives it its home directory row, its header and footer nav link and its sitemap entry; the page renders the standard product template (lede with action, optional picture, what it does, coming soon, data, close). A product leaves out any block it has nothing for.
 - **Writing** stays hidden until the first post is added to src/writing/index.js. With one post, the Writing directory row, nav link, /writing index (panels, newest first) and post pages appear, and the sitemap includes them.
 
 ### Motion

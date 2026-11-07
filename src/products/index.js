@@ -1,6 +1,7 @@
 /**
- * Every SaveBytes product, in the order they appear. A new product is one new entry here:
- * it gets its home-page row, its nav link, its own page at /<slug> and a sitemap entry.
+ * Every SaveBytes product, in the order they appear. A new product is one new entry here (its home-page row,
+ * nav link and sitemap entry) plus a page file: copy app/(marketing)/health/page.jsx to app/(marketing)/<slug>/
+ * and change the slug.
  *
  * Page blocks render top to bottom; leave out any block a product has nothing for.
  *   picture: the one rebuilt screen (a component name from src/products/screens)

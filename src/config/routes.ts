@@ -1,8 +1,8 @@
 import { site } from './site';
 // @ts-ignore: plain JS data modules
-import { PRODUCTS } from '../products';
+import { PRODUCTS } from '../products/index.js';
 // @ts-ignore: plain JS data modules
-import { hasWriting } from '../writing';
+import { hasWriting } from '../writing/index.js';
 
 type Page = { id: string; path: string; title: string; description: string };
 

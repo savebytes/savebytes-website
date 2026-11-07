@@ -1,7 +1,7 @@
 import React from 'react';
 import Directory from '../site/Directory';
-import { PRODUCTS } from '../products';
-import { hasWriting } from '../writing';
+import { PRODUCTS } from '../products/index.js';
+import { hasWriting } from '../writing/index.js';
 
 export default function Home() {
   const items = [

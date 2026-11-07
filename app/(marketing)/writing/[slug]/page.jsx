@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Post } from '../../../../src/views/Writing';
-import { POSTS, getPost } from '../../../../src/writing';
+import { POSTS, getPost } from '../../../../src/writing/index.js';
 import { metadataFor } from '../../../../src/config/routes';
 
 export const dynamicParams = false;
