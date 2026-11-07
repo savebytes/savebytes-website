@@ -52,7 +52,7 @@ export default function Contact() {
     const lead = cleanLead(values);
     const res = await submitLead(lead);
     if (res.ok) { setSent(true); track('lead_submitted', { role: lead.role }); }
-    else setSendErr("That didn't send. Please try again, or write to us directly.");
+    else setSendErr(res.message || "That didn't send. Please try again, or write to us directly.");
     setBusy(false);
   };
 

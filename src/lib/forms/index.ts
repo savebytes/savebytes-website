@@ -7,7 +7,7 @@
 import { site } from '../../config/site';
 
 export type FormValues = Record<string, FormDataEntryValue>;
-export type SubmitResult = { ok: true } | { ok: false; error: string };
+export type SubmitResult = { ok: true } | { ok: false; error: string; message?: string };
 
 async function endpointProvider(endpoint: string, values: FormValues): Promise<SubmitResult> {
   try {
@@ -16,7 +16,10 @@ async function endpointProvider(endpoint: string, values: FormValues): Promise<S
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(values),
     });
-    return res.ok ? { ok: true } : { ok: false, error: 'bad-status' };
+    if (res.ok) return { ok: true };
+    // The API explains a refusal in plain words (a field it could not accept, or too many messages).
+    const body = await res.json().catch(() => null);
+    return { ok: false, error: 'bad-status', message: typeof body?.message === 'string' ? body.message : undefined };
   } catch {
     return { ok: false, error: 'network' };
   }
