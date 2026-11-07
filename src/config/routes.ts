@@ -1,73 +1,52 @@
-import { features, type FeatureFlag } from './features';
 import { site } from './site';
+// @ts-ignore: plain JS data modules
+import { PRODUCTS } from '../products';
+// @ts-ignore: plain JS data modules
+import { hasWriting } from '../writing';
 
-export type RouteId = 'home' | 'health' | 'platform' | 'about' | 'contact' | 'privacy';
-
-export interface Route {
-  id: RouteId;
-  path: string;
-  title: string;
-  description: string;
-  /** Show in the header nav. */
-  nav?: { label: string };
-  /** Show in a footer column. */
-  footer?: { column: 'Products' | 'Company' | 'Legal'; label: string };
-  /** Omit from the sitemap (anchors, etc). */
-  noIndex?: boolean;
-  /** Only available when this feature flag is on. */
-  flag?: FeatureFlag;
-}
+type Page = { id: string; path: string; title: string; description: string };
 
 /**
- * THE route registry. Header, footer, sitemap, navigation and per-page metadata are all derived from it.
- * To add a page: add an entry here, a view in src/features/, and a page.tsx under app/(marketing)/.
+ * The site's own pages. Products come from src/products and Writing from src/writing; the header,
+ * footer, sitemap and page metadata are all built from these three sources.
  */
-export const routes: Route[] = [
-  { id: 'home', path: '/', title: 'SaveBytes · Software that wastes nothing', description: site.description },
-  {
-    id: 'health', path: '/health', title: 'SaveBytes Health · EHR for Indian clinics',
-    description: 'Appointments, queue, vitals, consult and prescriptions on one fast screen. Built for clinics with 2–5 doctors. In development.',
-    nav: { label: 'Health' }, footer: { column: 'Products', label: 'Health' },
-  },
-  {
-    id: 'platform', path: '/#platform', title: 'SaveBytes Platform', description: site.description,
-    nav: { label: 'Platform' }, footer: { column: 'Products', label: 'Platform' }, noIndex: true,
-  },
-  {
-    id: 'about', path: '/about', title: 'About SaveBytes',
-    description: 'How a GitHub repository name became a software company, and how we build.',
-    nav: { label: 'About' }, footer: { column: 'Company', label: 'About' },
-  },
-  {
-    id: 'contact', path: '/contact', title: 'Contact SaveBytes',
-    description: 'Run a clinic in Navi Mumbai or Mumbai? Join early access to SaveBytes Health.',
-    nav: { label: 'Contact' }, footer: { column: 'Company', label: 'Contact' },
-  },
-  {
-    id: 'privacy', path: '/privacy', title: 'Privacy · SaveBytes',
-    description: 'How savebytes.in handles the details you send us.',
-    footer: { column: 'Legal', label: 'Privacy' },
-  },
+export const pages: Page[] = [
+  { id: 'home', path: '/', title: 'SaveBytes · Quiet software for busy places', description: site.description },
+  { id: 'writing', path: '/writing', title: 'Writing · SaveBytes', description: 'Notes from SaveBytes on technology, strategy and how we build.' },
+  { id: 'about', path: '/about', title: 'About SaveBytes', description: 'How a GitHub repository name became a software company, and how we build.' },
+  { id: 'contact', path: '/contact', title: 'Contact SaveBytes', description: 'Talk to SaveBytes about your clinic, a partnership, or what we are building.' },
+  { id: 'privacy', path: '/privacy', title: 'Privacy · SaveBytes', description: 'How savebytes.in handles the details you send us.' },
 ];
 
-export const enabledRoutes = routes.filter((r) => !r.flag || features[r.flag]);
-export const getRoute = (id: RouteId) => routes.find((r) => r.id === id)!;
-export const hrefFor = (id: string) => routes.find((r) => r.id === id)?.path ?? '/';
+type Link = { id: string; label: string; href: string };
+const productLinks: Link[] = PRODUCTS.map((p: { slug: string; nav: string }) => ({ id: p.slug, label: p.nav, href: '/' + p.slug }));
+const writingLinks: Link[] = hasWriting() ? [{ id: 'writing', label: 'Writing', href: '/writing' }] : [];
 
-export const navLinks = enabledRoutes.filter((r) => r.nav).map((r) => ({ id: r.id, label: r.nav!.label, href: r.path }));
+/** Header: products, then Writing (once there is any), then About. Contact is the header's one action. */
+export const navLinks: Link[] = [...productLinks, ...writingLinks, { id: 'about', label: 'About', href: '/about' }];
 
-export const footerColumns = (['Products', 'Company', 'Legal'] as const).map((title) => ({
-  title,
-  links: enabledRoutes.filter((r) => r.footer?.column === title).map((r) => ({ id: r.id, label: r.footer!.label, href: r.path })),
-}));
+export const footerColumns = [
+  { title: 'Products', links: productLinks },
+  { title: 'Company', links: [...writingLinks, { id: 'about', label: 'About', href: '/about' }, { id: 'contact', label: 'Contact', href: '/contact' }] },
+  { title: 'Legal', links: [{ id: 'privacy', label: 'Privacy', href: '/privacy' }] },
+];
 
-/** Next.js metadata for a page, built from the registry. */
-export function pageMetadata(id: RouteId) {
-  const r = getRoute(id);
+/** Every address in the sitemap. */
+export const sitemapPaths = (): string[] => [
+  ...pages.filter((p) => p.id !== 'writing' || hasWriting()).map((p) => p.path),
+  ...productLinks.map((l) => l.href),
+];
+
+export function metadataFor(title: string, description: string, path: string) {
   return {
-    title: r.title,
-    description: r.description,
-    alternates: { canonical: r.path },
-    openGraph: { title: r.title, description: r.description, url: r.path, siteName: site.name, locale: site.locale, type: 'website' as const },
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: { title, description, url: path, siteName: site.name, locale: site.locale, type: 'website' as const },
   };
+}
+
+export function pageMetadata(id: string) {
+  const p = pages.find((x) => x.id === id)!;
+  return metadataFor(p.title, p.description, p.path);
 }

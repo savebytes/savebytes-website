@@ -1,6 +1,7 @@
-import './globals.css';
+import './site.css';
 import Script from 'next/script';
-import SiteShell from '../src/components/layout/SiteShell';
+import Header from '../src/site/Header';
+import Footer from '../src/site/Footer';
 import { site } from '../src/config/site';
 import { pageMetadata } from '../src/config/routes';
 import { analyticsConfig } from '../src/lib/analytics';
@@ -11,12 +12,20 @@ export const metadata = {
   icons: { icon: '/favicon.svg' },
 };
 
+export const viewport = { themeColor: '#ffffff', colorScheme: 'light' };
+
 export default function RootLayout({ children }) {
   const { provider, src, siteId } = analyticsConfig;
   return (
     <html lang="en-IN">
+      <head>
+        <link rel="preload" href="/fonts/AtkinsonHyperlegibleNext-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body>
-        <SiteShell>{children}</SiteShell>
+        <a href="#main" className="skip">Skip to content</a>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
         {provider === 'plausible' && src && <Script defer data-domain={siteId || 'savebytes.in'} src={src} strategy="afterInteractive" />}
         {provider === 'umami' && src && <Script defer data-website-id={siteId} src={src} strategy="afterInteractive" />}
       </body>

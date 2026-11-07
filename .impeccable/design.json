@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T00:00:00Z",
+  "title": "Design System: SaveBytes",
+  "extensions": {
+    "colorMeta": {
+      "savebytes-blue": { "role": "primary", "displayName": "SaveBytes Blue", "canonical": "#2f5bff", "tonalRamp": ["#0b1a5c", "#132a8f", "#1d3cc4", "#2448e0", "#2f5bff", "#7090ff", "#b3c4ff", "#e8edff"] },
+      "savebytes-blue-press": { "role": "primary", "displayName": "Press Blue", "canonical": "#2448e0", "tonalRamp": ["#0a1652", "#122684", "#1b37b6", "#2448e0", "#4a69ea", "#7f95f0", "#b7c4f7", "#e7ebfd"] },
+      "ground": { "role": "neutral", "displayName": "Ground", "canonical": "#ffffff", "tonalRamp": ["#26282b", "#45494f", "#6b717a", "#9aa1ac", "#c9ced6", "#e8eaee", "#f3f4f6", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#111315", "tonalRamp": ["#111315", "#26292d", "#3d424a", "#4a5059", "#6b717a", "#9aa1ac", "#c9ced6", "#f3f4f6"] },
+      "ink-secondary": { "role": "neutral", "displayName": "Secondary Ink", "canonical": "#4a5059", "tonalRamp": ["#1a1d21", "#2c3036", "#3d424a", "#4a5059", "#6b717a", "#9aa1ac", "#c9ced6", "#eef0f3"] },
+      "tone-step": { "role": "neutral", "displayName": "Tone Step", "canonical": "#f3f4f6", "tonalRamp": ["#2c3036", "#4a5059", "#6b717a", "#9aa1ac", "#c9ced6", "#e8eaee", "#f3f4f6", "#fafbfc"] },
+      "tone-step-hover": { "role": "neutral", "displayName": "Tone Step Hover", "canonical": "#e8eaee", "tonalRamp": ["#2c3036", "#4a5059", "#6b717a", "#9aa1ac", "#c9ced6", "#e8eaee", "#f3f4f6", "#fafbfc"] },
+      "field-line": { "role": "neutral", "displayName": "Field Line", "canonical": "#c9ced6", "tonalRamp": ["#2c3036", "#4a5059", "#6b717a", "#9aa1ac", "#c9ced6", "#dde1e6", "#eef0f3", "#fafbfc"] },
+      "field-line-hover": { "role": "neutral", "displayName": "Field Line Hover", "canonical": "#9aa1ac", "tonalRamp": ["#2c3036", "#4a5059", "#6b717a", "#9aa1ac", "#b8bec7", "#c9ced6", "#e8eaee", "#f3f4f6"] },
+      "placeholder-ink": { "role": "neutral", "displayName": "Placeholder Ink", "canonical": "#6b717a", "tonalRamp": ["#1a1d21", "#2c3036", "#4a5059", "#6b717a", "#9aa1ac", "#c9ced6", "#e8eaee", "#f3f4f6"] },
+      "danger": { "role": "error", "displayName": "Danger", "canonical": "#b4141f", "tonalRamp": ["#3d0609", "#640b11", "#8c1018", "#b4141f", "#d9464f", "#ea8a90", "#f5c4c7", "#fdeced"] },
+      "footer-ground": { "role": "neutral", "displayName": "Footer Ground", "canonical": "#111315", "tonalRamp": ["#111315", "#26292d", "#3d424a", "#4a5059", "#6b717a", "#9aa1ac", "#c9ced6", "#f3f4f6"] },
+      "footer-ink": { "role": "neutral", "displayName": "Footer Ink", "canonical": "#b9bfc8", "tonalRamp": ["#2c3036", "#4a5059", "#6b717a", "#8a919b", "#b9bfc8", "#d3d7dd", "#e8eaee", "#ffffff"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The h1 that opens every page. One per page, max 15ch, balanced." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings in blocks, closes and articles." },
+      "directory-name": { "displayName": "Directory name", "purpose": "The destination name inside a directory row; used only there." },
+      "lead": { "displayName": "Lead", "purpose": "The one plain line under a display heading, in secondary ink, max 44ch." },
+      "body": { "displayName": "Body", "purpose": "Prose and definitions, max 66ch in prose, 60ch in definitions." },
+      "small": { "displayName": "Small", "purpose": "Directory lines, form labels, help text, footer text, dates." }
+    },
+    "fonts": [
+      { "family": "Atkinson Hyperlegible Next", "source": "public/fonts/AtkinsonHyperlegibleNext-latin.woff2", "format": "woff2 variable", "axes": "wght 200-800", "display": "swap", "gsubFeatures": ["ccmp", "frac", "locl", "pnum", "tnum"], "note": "Draws a slashed zero by design with no unslashed alternate; the slashed zero is accepted everywhere." }
+    ],
+    "shadows": [],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one easing for every transition and the opening settle." },
+      { "name": "settle", "value": "opacity 0 to 1, translateY(14px) to none, 900ms, staggered 80ms", "purpose": "The one authored moment: the page opening, then directory rows (from 240ms) and the picture (1000ms, 260ms delay). Only without a reduced-motion preference." },
+      { "name": "hover-fast", "value": "160ms", "purpose": "Action background, nav link colour and background, field border." },
+      { "name": "hover-panel", "value": "200ms", "purpose": "Panel tone step on hover; the directory arrow moves 4px over 240ms." }
+    ],
+    "breakpoints": [
+      { "name": "fields-stack", "value": "559px" },
+      { "name": "definitions-stack", "value": "599px" },
+      { "name": "menu", "value": "759px" },
+      { "name": "blocks-stack", "value": "899px" },
+      { "name": "full-directory", "value": "1100px" }
+    ],
+    "focus": { "value": "outline: 2px solid #2f5bff; outline-offset: 3px", "footer": "outline-color: #ffffff" }
+  },
+  "components": [
+    {
+      "name": "The Action",
+      "kind": "button",
+      "refersTo": "action",
+      "description": "The single blue action per screen, usually Get in touch.",
+      "html": "<a href=\"#\" class=\"ds-act\">Get in touch</a>",
+      "css": ".ds-act { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: #2f5bff; color: #fff; font: 600 1.0625rem/1 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif; text-decoration: none; cursor: pointer; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-act:hover { background: #2448e0; } .ds-act:active { transform: scale(0.98); } .ds-act:focus-visible { outline: 2px solid #2f5bff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Small Action",
+      "kind": "button",
+      "refersTo": "action-small",
+      "description": "The header's version of the one action.",
+      "html": "<a href=\"#\" class=\"ds-act-sm\">Get in touch</a>",
+      "css": ".ds-act-sm { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: #2f5bff; color: #fff; font: 600 1rem/1 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif; text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-act-sm:hover { background: #2448e0; } .ds-act-sm:focus-visible { outline: 2px solid #2f5bff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Directory Row",
+      "kind": "card",
+      "refersTo": "directory-row",
+      "description": "The sign: one tone-step panel per destination, name, one line, arrow. Panels mean you can go here.",
+      "html": "<a href=\"#\" class=\"ds-dir-row\"><span class=\"ds-dir-text\"><span class=\"ds-dir-name\">SaveBytes Health</span><span class=\"ds-dir-line\">Patient records for clinics, in one place.</span></span><svg class=\"ds-dir-arrow\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-dir-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; max-width: 420px; padding: 28px; border-radius: 6px; background: #f3f4f6; color: #111315; text-decoration: none; font-family: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif; transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-dir-row:hover { background: #e8eaee; } .ds-dir-row:focus-visible { outline: 2px solid #2f5bff; outline-offset: 3px; } .ds-dir-text { display: flex; flex-direction: column; gap: 6px; } .ds-dir-name { font-size: clamp(1.375rem, 1.9vw, 1.75rem); font-weight: 650; letter-spacing: -0.02em; line-height: 1.15; } .ds-dir-line { font-size: 0.9375rem; color: #4a5059; line-height: 1.45; } .ds-dir-arrow { flex: none; margin-top: 0.35em; transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-dir-row:hover .ds-dir-arrow { transform: translateX(4px); }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Logo left, pill links in secondary ink, current page in ink at 650, then the small action.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Health</a><a href=\"#\">About</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 4px; font-family: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif; } .ds-nav a { display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 999px; font-size: 1rem; font-weight: 500; color: #4a5059; text-decoration: none; transition: color 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav a:hover { color: #111315; background: #f3f4f6; } .ds-nav a[aria-current=page] { color: #111315; font-weight: 650; } .ds-nav a:focus-visible { outline: 2px solid #2f5bff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Label above, white field with a 1px line, blue focus.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-f\">Phone or email</label><input id=\"ds-f\" placeholder=\"Navi Mumbai\"><p class=\"ds-help\">Whichever you give us, that is how we will reply.</p></div>",
+      "css": ".ds-field { display: grid; gap: 6px; max-width: 360px; font-family: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif; color: #111315; } .ds-field label { font-size: 0.9375rem; font-weight: 650; } .ds-field input { min-height: 50px; padding: 12px 14px; border: 1px solid #c9ced6; border-radius: 6px; background: #fff; color: #111315; font: 400 1.0625rem/1.4 inherit; transition: border-color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-field input::placeholder { color: #6b717a; } .ds-field input:hover { border-color: #9aa1ac; } .ds-field input:focus-visible { outline: 2px solid #2f5bff; outline-offset: 1px; border-color: #2f5bff; } .ds-help { font-size: 0.9375rem; color: #4a5059; margin: 0; }"
+    },
+    {
+      "name": "Content Block",
+      "kind": "custom",
+      "refersTo": "block",
+      "description": "Headline left, definitions right on the ground. Non-interactive content never goes in a panel.",
+      "html": "<section class=\"ds-block\"><h2>What it does</h2><dl><div><dt>Registration</dt><dd>Find a patient by name, mobile or clinic number, or register a new one.</dd></div><div><dt>Prescriptions</dt><dd>Signed by the doctor and printed with the clinic's name.</dd></div></dl></section>",
+      "css": ".ds-block { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 24px 48px; font-family: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif; color: #111315; background: #fff; } .ds-block h2 { margin: 0; font-size: clamp(1.625rem, 2.6vw, 2.25rem); font-weight: 650; line-height: 1.15; letter-spacing: -0.02em; } .ds-block dl { margin: 0; display: grid; gap: 24px; } .ds-block dl > div { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 4px 24px; } .ds-block dt { font-weight: 650; } .ds-block dd { margin: 0; color: #4a5059; max-width: 60ch; }"
+    },
+    {
+      "name": "Footer",
+      "kind": "custom",
+      "refersTo": "footer",
+      "description": "Dark footer: links, the full-width SaveBytes name, and the build-time page weight.",
+      "html": "<footer class=\"ds-foot\"><nav><strong>Company</strong><a href=\"#\">About</a><a href=\"#\">Contact</a></nav><p class=\"ds-foot-name\" aria-hidden=\"true\">SaveBytes</p><div class=\"ds-foot-end\"><span>© 2026 SaveBytes</span><span>This page weighs 183 KB.</span></div></footer>",
+      "css": ".ds-foot { background: #111315; color: #fff; padding: 48px 32px 24px; overflow: hidden; font-family: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, sans-serif; } .ds-foot nav { display: flex; flex-direction: column; font-size: 0.9375rem; } .ds-foot nav strong { font-weight: 650; margin-bottom: 6px; } .ds-foot a { color: #b9bfc8; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; } .ds-foot a:hover { color: #fff; text-decoration: underline; } .ds-foot a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; } .ds-foot-name { margin: 24px 0 0; font-size: 5rem; line-height: 0.8; letter-spacing: -0.055em; font-weight: 700; white-space: nowrap; } .ds-foot-end { display: flex; justify-content: space-between; gap: 16px; padding-top: 28px; color: #b9bfc8; font-size: 0.9375rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Hospital Signage",
+    "overview": "The site is a clear sign in a calm building: one statement, then a directory of where to go. Every page opens the same way (a large left-aligned statement, one plain line under it, at most one action) and then either points somewhere or says what it needs to in a two-column block. Nothing decorates; legibility, rhythm and the one blue action carry the whole system.\n\nDensity is low and the scale contrast is high: a display line up to 6rem against 1.125rem body, with generous section gaps. Light only, one ground, one ink and one grey tone step. The grey step has a single meaning: a panel you can go into. The site grows by registry entries (products, writing), never by new layouts.\n\nThe world rejects the split hero with a product shot, the row of feature cards, gradients, glass and resting shadows.",
+    "keyCharacteristics": [
+      "One white ground, near-black ink, one grey tone step for panels.",
+      "SaveBytes blue only on the logo and the single action per screen.",
+      "One typeface (Atkinson Hyperlegible Next), five type roles plus the directory-name size.",
+      "Directory rows: bold name, one line, an arrow at the far edge; no outlines, no shadows.",
+      "At most one picture per page, set on a tone-step mat.",
+      "Dark footer that returns the \"SaveBytes\" name at full frame width."
+    ],
+    "rules": [
+      { "name": "The One Blue Rule", "body": "SaveBytes blue appears on the logo and on one action per screen. Nothing else is blue at rest: not links, not headings, not icons, not panels.", "section": "colors" },
+      { "name": "The Light Only Rule", "body": "There is no dark theme. The only dark surface is the footer.", "section": "colors" },
+      { "name": "The Heading Stands Alone Rule", "body": "Nothing sits above a heading: no eyebrow, no kicker, no numbered label. A section starts with its heading.", "section": "typography" },
+      { "name": "The No Shadow Rule", "body": "Surfaces are flat at rest and stay flat on hover. State changes by tone, never by shadow, blur or glass.", "section": "elevation" },
+      { "name": "The Panel Means Go Rule", "body": "A tone-step panel means \"you can go here\" (or, for the contact form, \"you act here\"). Directory rows and writing-list entries are panels because they are links. Non-interactive content (facts, rules, prose, lists) is never put in a panel; it sits on the ground in a block.", "section": "components" }
+    ],
+    "dos": [
+      "Do open every page with a left-aligned display heading and one lead line.",
+      "Do keep SaveBytes blue to the logo and one action per screen.",
+      "Do use a tone-step panel only for something the visitor can go into or act in.",
+      "Do add a product or a post through its registry entry, never by building a new layout.",
+      "Do keep 44px touch targets and the 2px blue focus ring.",
+      "Do accept the slashed zero; the typeface has no other zero."
+    ],
+    "donts": [
+      "Don't use gradients, glass, blur or shadows, at rest or on hover.",
+      "Don't put a label, eyebrow or numbered label above a heading.",
+      "Don't build icon cards or rows of feature cards.",
+      "Don't put more than one picture on a page.",
+      "Don't put non-interactive content in a panel.",
+      "Don't alter, recolour or animate the logo.",
+      "Don't add a dark theme."
+    ]
+  }
+}

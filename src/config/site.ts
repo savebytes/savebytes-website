@@ -3,8 +3,8 @@ export const site = {
   name: 'SaveBytes',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://savebytes.in',
   locale: 'en_IN',
-  tagline: 'Software that wastes nothing.',
-  description: 'SaveBytes builds fast, focused software from Navi Mumbai, starting with an EHR for Indian clinics.',
+  tagline: 'Quiet software for busy places.',
+  description: 'SaveBytes builds focused software from Navi Mumbai, starting with patient records for clinics.',
   // Interim address. Swap for hello@savebytes.in once that mailbox exists (this is the only place to change).
   email: { address: 'ankit.singh4x@gmail.com', label: 'ankit.singh4x@gmail.com', href: 'mailto:ankit.singh4x@gmail.com' },
   whatsapp: { number: '918789286009', label: '+91 87892 86009', href: 'https://wa.me/918789286009?text=' + encodeURIComponent('Hi, I would like to know more about SaveBytes Health.') },
