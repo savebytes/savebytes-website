@@ -3,10 +3,8 @@ import { Post } from '../../../../src/views/Writing';
 import { POSTS, getPost } from '../../../../src/writing/index.js';
 import { metadataFor } from '../../../../src/config/routes';
 
-export const dynamicParams = false;
-export function generateStaticParams() {
-  // A static export needs at least one address here; until the first post exists this one renders "not found".
-  return POSTS.length ? POSTS.map((p) => ({ slug: p.slug })) : [{ slug: 'none' }];
+export async function generateStaticParams() {
+  return POSTS.map((p) => ({ slug: p.slug }));
 }
 export function generateMetadata({ params }) {
   const p = getPost(params.slug);

@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // fully static site: deploy the `out/` folder to any static host
+  // Use static export for production builds (next build -> out/)
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   images: { unoptimized: true },
   trailingSlash: false,
 };
