@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const pages = ['/', '/health', '/about', '/contact', '/privacy'];
+const pages = ['/', '/health', '/about', '/contact', '/privacy', '/writing', '/writing/the-3-minute-opd'];
 
 for (const path of pages) {
   test(`${path} renders without errors or horizontal scroll`, async ({ page }) => {

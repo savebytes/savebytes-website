@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const pages = ['/', '/health', '/about', '/contact', '/privacy'];
+const pages = ['/', '/health', '/about', '/contact', '/privacy', '/writing', '/writing/the-3-minute-opd'];
 
 test.describe('the rebuilt site', () => {
   test('home says who SaveBytes is and lists the products and pages', async ({ page }) => {
@@ -8,6 +8,7 @@ test.describe('the rebuilt site', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Quiet software for busy places.');
     const dir = page.getByRole('list', { name: 'Where to go' });
     await expect(dir.getByRole('link', { name: /SaveBytes Health/ })).toHaveAttribute('href', '/health');
+    await expect(dir.getByRole('link', { name: /Writing/ })).toHaveAttribute('href', '/writing');
     await expect(dir.getByRole('link', { name: /About SaveBytes/ })).toHaveAttribute('href', '/about');
     await expect(dir.getByRole('link', { name: /Get in touch/ })).toHaveAttribute('href', '/contact');
   });
@@ -22,9 +23,19 @@ test.describe('the rebuilt site', () => {
     expect(await page.locator('main figure, main img').count()).toBeLessThanOrEqual(1);
   });
 
-  test('platform, security, roadmap and writing are not linked while they are not public', async ({ page }) => {
+  test('platform, security and roadmap are not linked while they are not public', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' });
-    for (const p of ['/platform', '/security', '/roadmap', '/writing']) expect(await page.locator(`a[href="${p}"]`).count(), p).toBe(0);
+    for (const p of ['/platform', '/security', '/roadmap']) expect(await page.locator(`a[href="${p}"]`).count(), p).toBe(0);
+    expect(await page.locator('a[href="/writing"]').count()).toBeGreaterThanOrEqual(1);
+  });
+
+  test('writing section displays the first article', async ({ page }) => {
+    await page.goto('/writing', { waitUntil: 'networkidle' });
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Writing.');
+    await expect(page.getByText('The 3-minute OPD')).toBeVisible();
+    await page.getByRole('link', { name: /The 3-minute OPD/ }).click();
+    await expect(page).toHaveURL('/writing/the-3-minute-opd');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('The 3-minute OPD');
   });
 
   test('blue appears only on the logo and the one action', async ({ page }) => {
@@ -53,7 +64,7 @@ test.describe('the rebuilt site', () => {
     await page.setViewportSize({ width: 390, height: 800 });
     await page.goto('/', { waitUntil: 'networkidle' });
     await page.getByRole('button', { name: 'Menu' }).click();
-    for (const name of ['Health', 'About', 'Get in touch']) await expect(page.locator('#menu').getByRole('link', { name })).toBeVisible();
+    for (const name of ['Health', 'Writing', 'About', 'Get in touch']) await expect(page.locator('#menu').getByRole('link', { name })).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('#menu')).toHaveCount(0);
   });
